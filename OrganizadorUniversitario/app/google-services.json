@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1099261876871",
+    "firebase_url": "https://organizadoruniversitario.firebaseio.com",
+    "project_id": "organizadoruniversitario",
+    "storage_bucket": "organizadoruniversitario.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1099261876871:android:bd6efc932c82066c873622",
+        "android_client_info": {
+          "package_name": "tecnologiasmoviles.organizadoruniversitario"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1099261876871-u97rs6gl9kiu6ln62b4okmrjtlti84bm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaMbA4CnTxdXquWQvQCArnpCf9YCZh5_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1099261876871-u97rs6gl9kiu6ln62b4okmrjtlti84bm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
