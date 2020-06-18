@@ -1,5 +1,6 @@
 package tecnologiasmoviles.organizadoruniversitario
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_grade.*
@@ -19,6 +20,12 @@ class GradeActivity : AppCompatActivity() {
         val adapter = NotasAdapter(this,lista_notas)
 
         lista.adapter = adapter
+
+        lista.setOnItemClickListener { parent, view, position, id ->
+            val intent = Intent(this, NotaDetalle::class.java )
+            intent.putExtra("Nota", lista_notas[position])
+            startActivity(intent)
+        }
 
     }
     private  fun setUp(){

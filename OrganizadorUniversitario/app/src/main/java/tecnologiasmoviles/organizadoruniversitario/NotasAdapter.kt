@@ -26,7 +26,7 @@ class NotasAdapter(private val mContext: Context, private val listaNotas: List<N
     /**
      * Función para calcular el promedio de notas que estan en un arreglo
      */
-    private fun calcularPromedio(notas_original:Array<Double>):Double{
+    public fun calcularPromedio(notas_original:Array<Double>):Double{
         val notas_prom = notas_original.copyOf()
         var promedio = 0.0
         for (nota in notas_prom){
