@@ -15,8 +15,23 @@ class NotasAdapter(private val mContext: Context, private val listaNotas: List<N
         val notas = listaNotas[position]
 
         layout.nombreCurso.text = notas.nombreCurso
-        layout.nota.text = notas.numeroNota.toString()
+
+        val promedio= calcularPromedio(notas.notas)
+
+        layout.nota.text = promedio.toString()
 
         return layout
+    }
+
+    /**
+     * Función para calcular el promedio de notas que estan en un arreglo
+     */
+    private fun calcularPromedio(notas_original:Array<Double>):Double{
+        val notas_prom = notas_original.copyOf()
+        var promedio = 0.0
+        for (nota in notas_prom){
+            promedio = promedio + nota
+        }
+        return Math.round((promedio/notas_prom.size) * 10.0) / 10.0
     }
 }

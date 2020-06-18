@@ -1,9 +1,11 @@
 package tecnologiasmoviles.organizadoruniversitario
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -45,5 +47,11 @@ class HomeActivity : AppCompatActivity() {
             FirebaseAuth.getInstance().signOut()
             onBackPressed()
         }
+    }
+
+    public fun notas(notas: View){
+        val notasIntent = Intent(this,GradeActivity::class.java)
+        startActivity(notasIntent)
+
     }
 }
