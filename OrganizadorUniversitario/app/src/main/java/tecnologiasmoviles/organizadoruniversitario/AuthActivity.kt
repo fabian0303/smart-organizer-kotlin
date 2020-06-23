@@ -23,6 +23,7 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
+        //boton prueba
         test.setOnClickListener{
             val intent = Intent(this, ScheduleActivity::class.java)
             startActivity(intent)
