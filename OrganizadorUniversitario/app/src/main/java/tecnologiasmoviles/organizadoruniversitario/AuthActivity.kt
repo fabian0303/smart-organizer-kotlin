@@ -23,6 +23,11 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
+        test.setOnClickListener{
+            val intent = Intent(this, ScheduleActivity::class.java)
+            startActivity(intent)
+        }
+
         // Analytics Event
         val analytics: FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
         var bundle = Bundle()
