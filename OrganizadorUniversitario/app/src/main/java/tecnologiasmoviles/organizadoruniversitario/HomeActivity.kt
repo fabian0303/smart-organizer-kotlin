@@ -1,13 +1,13 @@
 package tecnologiasmoviles.organizadoruniversitario
 
+import android.app.ActionBar
 import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
+import tecnologiasmoviles.organizadoruniversitario.my_fragment.MyPageAdapter
+
 
 enum class ProviderType{
     BASIC,
@@ -24,18 +24,26 @@ class HomeActivity : AppCompatActivity() {
         val bundle = intent.extras
         val email = bundle?.getString("email")
         val provider = bundle?.getString("provider")
-        setUp(
-            email ?: "",
-            provider ?: ""
-        )
+        //setUp(email ?: "",provider ?: "")
 
         // Guardado de datos
         val prefs = getSharedPreferences(getString(R.string.prefs_file),Context.MODE_PRIVATE).edit()
         prefs.putString("email",email)
         prefs.putString("provider",provider)
         prefs.apply()
-    }
 
+
+        //======Brayan=================
+        toolBar.setTitle("tab Layout")
+        setSupportActionBar(toolBar)
+
+        val fragmentAdapter = MyPageAdapter(supportFragmentManager)
+        viewPager.adapter = fragmentAdapter
+        tabLayout.setupWithViewPager(viewPager)
+
+
+    }
+    /*
     private  fun setUp(email: String, provider: String){
         title = "Inicio"
         emailTextView.text = email
@@ -48,10 +56,10 @@ class HomeActivity : AppCompatActivity() {
             onBackPressed()
         }
     }
-
+*/
     public fun notas(notas: View){
-        val notasIntent = Intent(this,GradeActivity::class.java)
-        startActivity(notasIntent)
+        //val notasIntent = Intent(this,GradeActivity::class.java)
+        //startActivity(notasIntent)
 
     }
 }
