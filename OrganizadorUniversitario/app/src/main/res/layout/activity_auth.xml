@@ -83,4 +83,12 @@
             android:layout_height="wrap_content"
             android:text="Google" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test Horario"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="620dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
