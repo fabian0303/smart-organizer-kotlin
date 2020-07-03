@@ -1,10 +1,21 @@
 package tecnologiasmoviles.organizadoruniversitario.my_fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import kotlinx.android.synthetic.main.activity_grade.*
+import kotlinx.android.synthetic.main.fragment_nota.*
+import kotlinx.android.synthetic.main.fragment_nota.view.*
+import kotlinx.android.synthetic.main.fragment_nota.view.lista1
+import kotlinx.android.synthetic.main.fragment_nota.view.lista1
+import tecnologiasmoviles.organizadoruniversitario.Nota
+import tecnologiasmoviles.organizadoruniversitario.NotaDetalle
+import tecnologiasmoviles.organizadoruniversitario.NotasAdapter
 import tecnologiasmoviles.organizadoruniversitario.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,6 +32,7 @@ class FragmentNota : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var lv:ListView;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,15 +40,34 @@ class FragmentNota : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_nota, container, false)
+        val view1 = inflater.inflate(R.layout.fragment_nota, container, false)
+        val notas_curso1 = Nota("Ingenieria Economica", arrayOf(5.7,4.1,4.1,5.2,6.8))
+        val notas_curso2= Nota("Calculo I", arrayOf(5.5,4.3,4.0,5.2,6.0))
+        val notas_curso3 = Nota("Calculo II", arrayOf(5.0,4.0,4.0,5.0,6.0))
+
+
+        val lista_notas = listOf(notas_curso1,notas_curso2,notas_curso3)
+
+        val lista = view1.findViewById(R.id.lista1) as ListView
+        val adapter = NotasAdapter(activity!!,lista_notas)
+        lista.adapter = adapter
+        lista.setOnItemClickListener { parent, view, position, id ->
+            val intent = Intent(activity!!, NotaDetalle::class.java )
+            intent.putExtra("Nota", lista_notas[position])
+            startActivity(intent)
+        }
+        // Inflate the layo ut for this fragment
+        return view1
     }
+
 
     companion object {
         /**
