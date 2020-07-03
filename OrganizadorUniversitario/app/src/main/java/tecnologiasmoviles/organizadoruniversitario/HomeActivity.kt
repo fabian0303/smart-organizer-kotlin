@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.fragment_horario.*
 import tecnologiasmoviles.organizadoruniversitario.my_fragment.MyPageAdapter
 
 
@@ -45,6 +46,7 @@ class HomeActivity : AppCompatActivity() {
         tabLayout.setupWithViewPager(viewPager)
 
 
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -66,26 +68,4 @@ class HomeActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    /*
-    private  fun setUp(email: String, provider: String){
-        title = "Inicio"
-        emailTextView.text = email
-        providerTextView2.text = provider
-        logOutButton.setOnClickListener {
-            val prefs = getSharedPreferences(getString(R.string.prefs_file),Context.MODE_PRIVATE).edit()
-            prefs.clear()
-            prefs.apply()
-            FirebaseAuth.getInstance().signOut()
-            onBackPressed()
-        }
-    }
-
-
-   */
-    /*
-    public fun notas(notas: View){
-        //val notasIntent = Intent(this,GradeActivity::class.java)
-        //startActivity(notasIntent)
-
-    }*/
 }
