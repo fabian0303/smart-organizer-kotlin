@@ -4,7 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fondo"
     tools:context=".AuthActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:layout_constraintBottom_toTopOf="@+id/authLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/calendario_verde" />
 
     <LinearLayout
         android:id="@+id/authLayout"
@@ -24,9 +35,11 @@
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="textEmailAddress" />
+            android:backgroundTint="@color/letras"
+            android:hint="Correo Electronico"
+            android:inputType="textEmailAddress"
+            android:singleLine="false"
+            android:textColorHint="@color/letras" />
 
         <Space
             android:layout_width="match_parent"
@@ -36,52 +49,65 @@
             android:id="@+id/passwordEditText2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/letras"
             android:ems="10"
             android:hint="Contraseña"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColorHint="@color/letras" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/signUpButton"
-                android:layout_width="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/recuperar_contrasena"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="Registrar"
-                android:textColor="@android:color/white" />
-
+                android:text="Olvidaste tu contraseña?"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:textColor="@color/letras"
+                android:gravity="right"
+                ></TextView>
             <Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
 
             <Button
                 android:id="@+id/loginButton"
-                android:layout_width="wrap_content"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorPrimaryDark"
-                android:text="Acceder"
+                android:background="@drawable/boton_redondeado"
+                android:text="Iniciar sesión"
                 android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/signUpButton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/boton_redondeado"
+                android:text="Registrar"
+                android:textColor="@android:color/white" />
+
+            <ImageView
+                android:id="@+id/googleButton"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/google_ico" />
+
+
         </LinearLayout>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
-
-        <Button
-            android:id="@+id/googleButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Google" />
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

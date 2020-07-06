@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".my_fragment.FragmentNota">
+    tools:context=".my_fragment.FragmentNota"
+    android:background="@color/fondo_fragment">
 
     <!-- TODO: Update blank fragment layout -->
 
