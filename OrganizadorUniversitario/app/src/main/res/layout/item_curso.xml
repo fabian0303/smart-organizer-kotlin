@@ -12,8 +12,13 @@
         android:layout_marginStart="112dp"
         android:layout_marginTop="32dp"
         android:text="TextView"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:clickable="true"
+        android:enabled="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="true" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -26,6 +31,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/book" />
+        app:srcCompat="@drawable/libro2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
