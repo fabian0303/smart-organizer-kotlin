@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
+import tecnologiasmoviles.organizadoruniversitario.Curso
+import tecnologiasmoviles.organizadoruniversitario.CursoAdapter
+import tecnologiasmoviles.organizadoruniversitario.NotasAdapter
 import tecnologiasmoviles.organizadoruniversitario.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -34,8 +38,18 @@ class FragmentCurso : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_curso, container, false)
+        val view1 = inflater.inflate(R.layout.fragment_curso, container, false)
+        val curso1 = Curso("Ingenieria Economica")
+        val curso2= Curso("Calculo I")
+        val curso3 = Curso("Calculo II")
+
+        val lista_cursos = listOf(curso1,curso2,curso3)
+
+        val lista = view1.findViewById(R.id.lista_cursos) as ListView
+
+        val adapter = CursoAdapter(activity!!,lista_cursos)
+        lista.adapter = adapter
+        return view1
     }
 
     companion object {
