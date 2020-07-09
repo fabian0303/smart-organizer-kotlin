@@ -11,6 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Vistas.NuevaAsignatura"></activity>
+
         <activity android:name=".CursoAdapter"></activity>
         <activity android:name=".NotaDetalleAdapter" />
         <activity android:name=".NotaDetalle" />
