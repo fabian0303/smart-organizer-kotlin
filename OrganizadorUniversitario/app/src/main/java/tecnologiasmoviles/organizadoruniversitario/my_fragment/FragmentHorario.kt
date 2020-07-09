@@ -1,16 +1,20 @@
 package tecnologiasmoviles.organizadoruniversitario.my_fragment
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.GridLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_schedule.*
+import tecnologiasmoviles.organizadoruniversitario.HomeActivity
 import tecnologiasmoviles.organizadoruniversitario.R
+import tecnologiasmoviles.organizadoruniversitario.Vistas.NuevaAsignatura
 import kotlin.random.Random
 
 private const val ARG_PARAM1 = "param1"
@@ -69,23 +73,12 @@ class FragmentHorario : Fragment() {
         viernes_text.width = width/dias
         sabado_text.width = width/dias
 
-        var contador = 0
-        var contadorBloque = 0
-        while(contador < bloques*6){
-            var bloqueText = TextView(context)
-            bloqueText.textSize = 11F
-            bloqueText.setOnClickListener {
-                Toast.makeText(context, "You clicked on TextView 'Click Me'.", Toast.LENGTH_SHORT).show()
-                val color: Int = Color.argb(255, Random.nextInt(256), Random.nextInt(256), Random.nextInt(256))
-                bloqueText.setBackgroundColor(color)
-                bloqueText.text = "Tecnologías Móviles"
-            }
-            if(contador%6 == 0){
-                contadorBloque++
-            }
-            bloqueText.text = "Bloque "+contadorBloque
-            grid.addView(bloqueText,width/dias,170)
-            contador++
+        val botonFlotante = view.findViewById(R.id.añadirAsignatura_btn) as com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        botonFlotante.setOnClickListener {
+            val intent = Intent(context, NuevaAsignatura::class.java)
+            startActivity(intent)
+
         }
 
 
