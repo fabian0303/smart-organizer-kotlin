@@ -3,8 +3,12 @@
     <color name="colorPrimary">#039BE5</color>
     <color name="colorPrimaryDark">#2C384A</color>
     <color name="colorAccent">#FF8A65</color>
-    <color name="fondo">#2e7d32</color>
+    <color name="fondo">#e3f2fd</color>
+    <color name="fondo_2">#ffffff</color>
     <color name="letras">#fff</color>
-    <color name="toolbar_color">#60ad5e</color>
-    <color name="fondo_fragment">#e8f5e9</color>
+    <color name="color_letras2">#000000</color>
+    <color name="toolbar_superior_color">#004c8c</color>
+    <color name="toolbar_inferior_color">#0277bd</color>
+    <color name="fondo_fragment">#e3f2fd</color>
+    <color name="color_botones">#b1bfca</color>
 </resources>

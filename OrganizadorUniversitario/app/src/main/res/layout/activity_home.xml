@@ -20,7 +20,7 @@
             android:layout_height="?attr/actionBarSize"
             app:titleTextColor="#ffffff"
             android:elevation="20dp"
-            android:background="@color/toolbar_color"
+            android:background="@color/toolbar_superior_color"
             >
             //contenido del titulo y el buscador
 
@@ -31,7 +31,7 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/toolbar_color"
+            android:background="@color/toolbar_inferior_color"
             app:tabGravity="fill"
             app:tabIndicatorColor="#ffffff"
             app:tabMaxWidth="0dp"
@@ -50,6 +50,8 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     </androidx.viewpager.widget.ViewPager>
+
+
 
 
 </LinearLayout>
