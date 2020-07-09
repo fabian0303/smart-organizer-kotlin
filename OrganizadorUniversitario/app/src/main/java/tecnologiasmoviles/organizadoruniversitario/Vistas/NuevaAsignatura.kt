@@ -16,6 +16,10 @@ class NuevaAsignatura : AppCompatActivity() {
         volver_btn.setOnClickListener {
             onBackPressed()
         }
+        cancelar_btn.setOnClickListener {
+            onBackPressed()
+
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
