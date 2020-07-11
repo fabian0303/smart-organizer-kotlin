@@ -3,7 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/fondo"
     android:orientation="vertical">
+
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
@@ -11,6 +14,7 @@
         android:background="@color/toolbar_superior_color"
         android:elevation="20dp"
         app:titleTextColor="#ffffff"
+        android:layout_marginBottom="30dp"
         android:layout_gravity="left">
 
         <ImageView
@@ -21,6 +25,12 @@
 
 
     </androidx.appcompat.widget.Toolbar>
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/libro" />
 
 
     <LinearLayout
@@ -37,6 +47,7 @@
             android:id="@+id/text_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/color_letras2"
             android:text="Dia de la semana" />
 
         <EditText
@@ -52,6 +63,7 @@
             android:id="@+id/text2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/color_letras2"
             android:text="Curso" />
 
         <EditText
@@ -73,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:text="Bloque de inicio"
                 android:layout_marginLeft="20dp"
+                android:textColor="@color/color_letras2"
                 android:layout_marginRight="100dp"/>
 
 
@@ -80,6 +93,7 @@
                 android:id="@+id/text4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/color_letras2"
                 android:text="Bloque de termino" />
         </LinearLayout>
         <LinearLayout
@@ -105,12 +119,45 @@
                 android:layout_marginLeft="10dp"/>
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/text5"
+            android:layout_width="match_parent"
+            android:textColor="@color/color_letras2"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Ingrese el nombre de la sala " />
+
         <EditText
-            android:id="@+id/editTextTextPersonName6"
+            android:id="@+id/Sala_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="text"
+            android:hint="Opcional"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cancelar_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:text="Cancelar" />
+
+            <Button
+                android:id="@+id/agregar_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:text="Guardar" />
+        </LinearLayout>
+
     </LinearLayout>
+
 </LinearLayout>

@@ -13,6 +13,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Vistas.NuevaAsignatura"></activity>
 
+        <activity android:name=".CursoAdapter"></activity>
+        <activity android:name=".NotaDetalleAdapter" />
         <activity android:name=".NotaDetalle" />
         <activity android:name=".GradeActivity" />
         <activity android:name=".ScheduleActivity" />
