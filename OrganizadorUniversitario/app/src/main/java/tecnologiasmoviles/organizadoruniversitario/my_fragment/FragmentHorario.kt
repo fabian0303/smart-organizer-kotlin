@@ -5,13 +5,11 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.GridLayout
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -19,6 +17,7 @@ import androidx.fragment.app.Fragment
 import tecnologiasmoviles.organizadoruniversitario.R
 import tecnologiasmoviles.organizadoruniversitario.Vistas.NuevaAsignatura
 import kotlin.random.Random
+
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -51,18 +50,31 @@ class FragmentHorario : Fragment() {
         //val btn_cambio =  view.findViewById(R.id.cambioNombreBtn) as Button
 
         //========================================
+
+        val botonFlotante = view.findViewById(R.id.añadirAsignatura_btn) as com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        botonFlotante.setOnClickListener {
+            val intent = Intent(context, NuevaAsignatura::class.java)
+            startActivity(intent)
+        }
+        //se muestra boton flotante por 3 segundos y luego desaparece
+        botonFlotante.postDelayed({ botonFlotante.hide() }, 3000)
+
         val ancho = resources.displayMetrics.widthPixels
         val height = resources.displayMetrics.heightPixels
         var dias = 6
         var bloques = 11
         val anchoDias = (ancho-90)/dias
+
         val lunes_text = view.findViewById(R.id.lunesText) as TextView
         val martes_text = view.findViewById(R.id.martesText) as TextView
         val miercoles_text = view.findViewById(R.id.miercolesText) as TextView
         val jueves_text = view.findViewById(R.id.juevesText) as TextView
         val viernes_text = view.findViewById(R.id.viernesText) as TextView
         val sabado_text = view.findViewById(R.id.sabadoText) as TextView
+
         val grid = view.findViewById(R.id.gridlayout) as GridLayout
+        val scrollView = view.findViewById(R.id.scrollView) as ScrollView
 
         grid.rowCount = bloques
         grid.columnCount = dias + 1
@@ -84,11 +96,12 @@ class FragmentHorario : Fragment() {
         var hora = 8
         var minutos = 3
 
+        //Ciclo para generar bloques en el horario
         while( contador < (bloques)*(dias+1)){
 
             val bloqueText = TextView(activity)
 
-            bloqueText.setBackgroundResource(R.drawable.back)
+            bloqueText.setBackgroundResource(R.drawable.back) //borde de color gris para los textview
             bloqueText.id = contador
             bloqueText.textSize = 11F
             bloqueText.height = 170
@@ -120,13 +133,21 @@ class FragmentHorario : Fragment() {
             contador++
         }
 
-        val botonFlotante = view.findViewById(R.id.añadirAsignatura_btn) as com.google.android.material.floatingactionbutton.FloatingActionButton
+        //se agrega un bloque vacío para temas de diseño en pantalla
+        val bloqueText = TextView(activity)
+        bloqueText.height = 50
+        bloqueText.width = 90
+        grid.addView(bloqueText)
+        contador++
 
-        botonFlotante.setOnClickListener {
-            val intent = Intent(context, NuevaAsignatura::class.java)
-            startActivity(intent)
-
+        //Se añade un listener a ScrollView
+        //Si se toca la pantalla, el botón flotante aparece por 3 segundos y luego desaparece
+        scrollView.setOnTouchListener { view, event ->
+            botonFlotante.show()
+            botonFlotante.postDelayed({ botonFlotante.hide() }, 3000)
+            false
         }
+
         // Inflate the layout for this fragment
         return view
     }
