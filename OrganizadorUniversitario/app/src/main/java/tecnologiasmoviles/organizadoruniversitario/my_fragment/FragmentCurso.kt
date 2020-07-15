@@ -6,10 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
-import tecnologiasmoviles.organizadoruniversitario.Curso
-import tecnologiasmoviles.organizadoruniversitario.CursoAdapter
-import tecnologiasmoviles.organizadoruniversitario.NotasAdapter
-import tecnologiasmoviles.organizadoruniversitario.R
+import tecnologiasmoviles.organizadoruniversitario.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +22,7 @@ class FragmentCurso : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var cursoDao: CursoDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,11 +37,17 @@ class FragmentCurso : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view1 = inflater.inflate(R.layout.fragment_curso, container, false)
-        val curso1 = Curso("Ingenieria Economica")
-        val curso2= Curso("Calculo I")
-        val curso3 = Curso("Calculo II")
+        val curso1 = Curso(1,"Robotic")
+        val curso2= Curso(2,"IoT")
+        val curso3 = Curso(2,"App")
 
-        val lista_cursos = listOf(curso1,curso2,curso3)
+        cursoDao.agregarCurso(curso1)
+        cursoDao.agregarCurso(curso2)
+        cursoDao.agregarCurso(curso3)
+
+        //val lista_cursos = listOf(curso1,curso2,curso3)
+        cursoDao = AppDatabase.getInstance(activity!!).cursoDao()
+        val lista_cursos = ArrayList<Curso>(cursoDao.obtenerCurso())
 
         val lista = view1.findViewById(R.id.lista_cursos) as ListView
 
