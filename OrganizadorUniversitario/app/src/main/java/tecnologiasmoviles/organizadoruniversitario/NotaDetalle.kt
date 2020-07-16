@@ -18,14 +18,17 @@ class NotaDetalle : AppCompatActivity() {
         val nota = intent.getSerializableExtra("Nota") as Nota
         var notas_lista = arrayListOf<String>()
         var i = 1
+
+/**
         for (nota in nota.notas){
             notas_lista.add("Nota "+i+": "+nota)
             i++
         }
         lista_notas.adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,notas_lista)
-
-        curso.text = nota.nombreCurso
-        val promedio1= calcularPromedio(nota.notas)
+ */
+        curso.text = nota.refCurso
+        //val promedio1= calcularPromedio(nota.notas)
+        val promedio1= 5.0
          promedio.text = promedio1.toString()
 
     }

@@ -6,10 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.ListView
-import kotlinx.android.synthetic.main.activity_grade.*
-import kotlinx.android.synthetic.main.fragment_nota.*
 import kotlinx.android.synthetic.main.fragment_nota.view.*
 import kotlinx.android.synthetic.main.fragment_nota.view.lista1
 import kotlinx.android.synthetic.main.fragment_nota.view.lista1

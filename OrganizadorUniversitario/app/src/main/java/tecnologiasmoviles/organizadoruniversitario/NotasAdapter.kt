@@ -16,9 +16,9 @@ import tecnologiasmoviles.organizadoruniversitario.my_fragment.FragmentNota
 
         val notas = listaNotas[position]
 
-        layout.nombreCurso.text = notas.nombreCurso
+        layout.nombreCurso.text = notas.refCurso
 
-        val promedio= calcularPromedio(notas.notas)
+        val promedio= 5.0
 
         layout.nota.text = promedio.toString()
 

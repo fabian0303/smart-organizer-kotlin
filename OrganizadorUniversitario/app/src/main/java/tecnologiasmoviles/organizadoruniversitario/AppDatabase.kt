@@ -21,7 +21,7 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "smart-organizer-db"
-                ).build()
+                ).allowMainThreadQueries().build()
             }
             return  INSTANCE!!
         }
