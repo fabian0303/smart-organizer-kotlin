@@ -7,9 +7,13 @@ import androidx.room.RoomDatabase
 
 
 
-@Database(entities = [Curso::class], version = 1)
+@Database(entities = [Curso::class,Nota::class,Archivo::class,Horario::class,Bloque::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun cursoDao(): CursoDao
+    abstract fun notaDao(): NotaDao
+    abstract fun archivoDao(): ArchivoDao
+    abstract fun bloqueDao(): BloqueDao
+    abstract fun horarioDao(): HorarioDao
 
     companion object{
 

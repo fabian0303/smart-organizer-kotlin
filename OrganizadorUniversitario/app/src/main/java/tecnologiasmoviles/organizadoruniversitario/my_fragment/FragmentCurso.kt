@@ -40,9 +40,9 @@ class FragmentCurso : Fragment() {
     ): View? {
 
         val view1 = inflater.inflate(R.layout.fragment_curso, container, false)
-        val curso1 = Curso("Robotic")
-        val curso2= Curso("IoT")
-        val curso3 = Curso("App")
+        val curso1 = Curso(1,"Robotic")
+        val curso2= Curso(2,"IoT")
+        val curso3 = Curso(3,"App")
 
 
 

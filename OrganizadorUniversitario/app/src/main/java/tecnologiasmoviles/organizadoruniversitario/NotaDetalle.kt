@@ -26,7 +26,8 @@ class NotaDetalle : AppCompatActivity() {
         }
         lista_notas.adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,notas_lista)
  */
-        curso.text = nota.refCurso
+       curso.text = nota.refCurso.toString()
+        //curso.text = 1.toString()
         //val promedio1= calcularPromedio(nota.notas)
         val promedio1= 5.0
          promedio.text = promedio1.toString()
