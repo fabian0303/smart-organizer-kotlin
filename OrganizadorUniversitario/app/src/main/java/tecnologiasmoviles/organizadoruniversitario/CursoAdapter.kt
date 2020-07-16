@@ -16,7 +16,7 @@ class CursoAdapter(private val mContext: FragmentActivity, private val listacurs
 
         val curso = listacursos[position]
 
-        layout.curso.text = curso.nombreCurso
+        layout.curso.text = curso.nombre
 
         return layout
     }
