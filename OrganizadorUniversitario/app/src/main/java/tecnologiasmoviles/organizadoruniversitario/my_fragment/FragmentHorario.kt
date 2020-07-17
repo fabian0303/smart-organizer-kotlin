@@ -5,7 +5,9 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
@@ -13,6 +15,7 @@ import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import tecnologiasmoviles.organizadoruniversitario.R
 import tecnologiasmoviles.organizadoruniversitario.Vistas.NuevaAsignatura
@@ -41,7 +44,7 @@ class FragmentHorario : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "ClickableViewAccessibility")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? )
             : View? {
         val view= inflater.inflate(R.layout.fragment_horario, container, false)
@@ -104,7 +107,7 @@ class FragmentHorario : Fragment() {
             bloqueText.setBackgroundResource(R.drawable.back) //borde de color gris para los textview
             bloqueText.id = contador
             bloqueText.textSize = 11F
-            bloqueText.height = 170
+            bloqueText.height = 190
             //bloqueText.gravity  = Gravity.CENTER
 
             if(contador%7 == 0){ //discrimina las posiciones donde se muestran las horas
@@ -140,14 +143,19 @@ class FragmentHorario : Fragment() {
         grid.addView(bloqueText)
         contador++
 
-        //Se añade un listener a ScrollView
-        //Si se toca la pantalla, el botón flotante aparece por 3 segundos y luego desaparece
-        scrollView.setOnTouchListener { view, event ->
-            botonFlotante.show()
-            botonFlotante.postDelayed({ botonFlotante.hide() }, 3000)
-            false
+        //Funcion recursiva para mostrar/ocultar el botón flotante
+        //Al tocar la pantalla, se muestra durante 3 segundos el botón flotante
+        //El touch listener se desactiva y se vuelve a activar a los 3 segundos
+        fun showHideBotonFlotante (){
+            scrollView.setOnTouchListener { view, event ->
+                botonFlotante.show()
+                botonFlotante.postDelayed({ botonFlotante.hide() }, 3000)
+                scrollView.setOnTouchListener { _, _ ->  false }
+                scrollView.postDelayed({showHideBotonFlotante()},3000)
+                false
+            }
         }
-
+        showHideBotonFlotante()
         // Inflate the layout for this fragment
         return view
     }
