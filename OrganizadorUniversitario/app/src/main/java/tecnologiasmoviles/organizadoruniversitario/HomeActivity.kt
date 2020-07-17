@@ -1,11 +1,17 @@
 package tecnologiasmoviles.organizadoruniversitario
 
+import android.app.ActionBar
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.fragment_horario.*
+import tecnologiasmoviles.organizadoruniversitario.my_fragment.MyPageAdapter
+
 
 enum class ProviderType{
     BASIC,
@@ -22,28 +28,44 @@ class HomeActivity : AppCompatActivity() {
         val bundle = intent.extras
         val email = bundle?.getString("email")
         val provider = bundle?.getString("provider")
-        setUp(
-            email ?: "",
-            provider ?: ""
-        )
+        //setUp(email ?: "",provider ?: "")
 
         // Guardado de datos
         val prefs = getSharedPreferences(getString(R.string.prefs_file),Context.MODE_PRIVATE).edit()
         prefs.putString("email",email)
         prefs.putString("provider",provider)
         prefs.apply()
+
+
+        //se le añade el nombre al toolbar
+        toolBar.setTitle(R.string.app_name)
+        setSupportActionBar(toolBar)
+        //Muestro los tabLayout
+        val fragmentAdapter = MyPageAdapter(supportFragmentManager)
+        viewPager.adapter = fragmentAdapter
+        tabLayout.setupWithViewPager(viewPager)
+
+
+
     }
 
-    private  fun setUp(email: String, provider: String){
-        title = "Inicio"
-        emailTextView.text = email
-        providerTextView2.text = provider
-        logOutButton.setOnClickListener {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar_home,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id= item.itemId;
+        if(id == R.id.cerrarSesion){
+            title = "Inicio"
             val prefs = getSharedPreferences(getString(R.string.prefs_file),Context.MODE_PRIVATE).edit()
             prefs.clear()
             prefs.apply()
             FirebaseAuth.getInstance().signOut()
             onBackPressed()
+
         }
+        return super.onOptionsItemSelected(item)
     }
+
 }
