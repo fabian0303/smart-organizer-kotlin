@@ -5,9 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
@@ -15,10 +13,9 @@ import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import tecnologiasmoviles.organizadoruniversitario.R
-import tecnologiasmoviles.organizadoruniversitario.Vistas.NuevaAsignatura
+import tecnologiasmoviles.organizadoruniversitario.Vistas.agregarCursoActivity
 import kotlin.random.Random
 
 
@@ -57,7 +54,7 @@ class FragmentHorario : Fragment() {
         val botonFlotante = view.findViewById(R.id.añadirAsignatura_btn) as com.google.android.material.floatingactionbutton.FloatingActionButton
 
         botonFlotante.setOnClickListener {
-            val intent = Intent(context, NuevaAsignatura::class.java)
+            val intent = Intent(context, agregarCursoActivity::class.java)
             startActivity(intent)
         }
         //se muestra boton flotante por 3 segundos y luego desaparece

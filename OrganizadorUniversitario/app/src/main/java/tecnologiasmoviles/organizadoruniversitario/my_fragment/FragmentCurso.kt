@@ -1,12 +1,20 @@
 package tecnologiasmoviles.organizadoruniversitario.my_fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.ListView
 import tecnologiasmoviles.organizadoruniversitario.*
+import tecnologiasmoviles.organizadoruniversitario.Adaptadores.CursoAdapter
+import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
+import tecnologiasmoviles.organizadoruniversitario.Data.AppDatabase
+import tecnologiasmoviles.organizadoruniversitario.Data.CursoDao
+import tecnologiasmoviles.organizadoruniversitario.Vistas.agregarCursoActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,25 +48,41 @@ class FragmentCurso : Fragment() {
     ): View? {
 
         val view1 = inflater.inflate(R.layout.fragment_curso, container, false)
-        val curso1 = Curso(1,"Robotic")
-        val curso2= Curso(2,"IoT")
-        val curso3 = Curso(3,"App")
+        val curso1 = Curso(
+
+            "Robotic",0
+        )
+
 
 
 
         cursoDao = AppDatabase.getInstance(activity!!).cursoDao()
 
         cursoDao.agregarCurso(curso1)
-        cursoDao.agregarCurso(curso2)
-        cursoDao.agregarCurso(curso3)
+
 
 
         val lista_cursos = ArrayList<Curso>(cursoDao.obtenerCurso())
 
         val lista = view1.findViewById(R.id.lista_cursos) as ListView
 
-        val adapter = CursoAdapter(activity!!,lista_cursos)
+        val adapter =
+            CursoAdapter(
+                activity!!,
+                lista_cursos
+            )
+
         lista.adapter = adapter
+
+        val agregarCurso = view1.findViewById(R.id.agregarCursoBtn) as com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        agregarCurso.setOnClickListener {
+            val intent = Intent(activity!!, agregarCursoActivity::class.java)
+            startActivity(intent)
+
+        }
+
+
         return view1
     }
 

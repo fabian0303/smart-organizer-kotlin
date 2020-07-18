@@ -11,16 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Vistas.NuevaAsignatura"></activity>
-
-        <activity android:name=".CursoAdapter"></activity>
+        <activity android:name=".Vistas.agregarCursoActivity"></activity>
+        <activity android:name=".Vistas.NuevaAsignatura" />
+        <activity android:name=".Adaptadores.CursoAdapter" />
         <activity android:name=".NotaDetalleAdapter" />
-        <activity android:name=".NotaDetalle" />
+        <activity android:name=".Vistas.NotaDetalle" />
         <activity android:name=".GradeActivity" />
         <activity android:name=".ScheduleActivity" />
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".Vistas.HomeActivity" />
         <activity
-            android:name=".AuthActivity"
+            android:name=".Vistas.AuthActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

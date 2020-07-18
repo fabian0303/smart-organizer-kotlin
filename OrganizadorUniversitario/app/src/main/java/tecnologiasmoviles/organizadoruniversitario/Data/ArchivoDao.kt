@@ -1,6 +1,7 @@
-package tecnologiasmoviles.organizadoruniversitario
+package tecnologiasmoviles.organizadoruniversitario.Data
 
 import androidx.room.*
+import tecnologiasmoviles.organizadoruniversitario.Clases.Archivo
 
 @Dao
 interface ArchivoDao {
