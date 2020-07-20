@@ -1,4 +1,4 @@
-package tecnologiasmoviles.organizadoruniversitario
+package tecnologiasmoviles.organizadoruniversitario.Adaptadores
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.FragmentActivity
 import kotlinx.android.synthetic.main.item_curso.view.*
-import kotlinx.android.synthetic.main.item_nota.view.*
+import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
+import tecnologiasmoviles.organizadoruniversitario.R
 
 class CursoAdapter(private val mContext: FragmentActivity, private val listacursos: List<Curso>):
     ArrayAdapter<Curso>(mContext,0,listacursos) {

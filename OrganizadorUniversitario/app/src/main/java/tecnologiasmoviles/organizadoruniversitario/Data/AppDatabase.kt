@@ -1,15 +1,19 @@
-package tecnologiasmoviles.organizadoruniversitario
+package tecnologiasmoviles.organizadoruniversitario.Data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import tecnologiasmoviles.organizadoruniversitario.Clases.*
 
 
-
-@Database(entities = [Curso::class], version = 1)
+@Database(entities = [Curso::class, Nota::class, Archivo::class, Horario::class, Bloque::class], version = 4)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun cursoDao(): CursoDao
+    abstract fun notaDao(): NotaDao
+    abstract fun archivoDao(): ArchivoDao
+    abstract fun bloqueDao(): BloqueDao
+    abstract fun horarioDao(): HorarioDao
 
     companion object{
 
@@ -21,7 +25,7 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "smart-organizer-db"
-                ).build()
+                ).allowMainThreadQueries().build()
             }
             return  INSTANCE!!
         }
