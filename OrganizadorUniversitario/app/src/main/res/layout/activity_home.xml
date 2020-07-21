@@ -36,8 +36,9 @@
             app:tabIndicatorColor="#ffffff"
             app:tabMaxWidth="0dp"
             app:tabMode="fixed"
-            app:tabRippleColor="#FFFFFF"
-            app:tabTextColor="#ffffff" />
+            app:tabSelectedTextColor="@color/white"
+            app:tabRippleColor="@color/color_botones"
+            app:tabTextColor="@color/gray" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

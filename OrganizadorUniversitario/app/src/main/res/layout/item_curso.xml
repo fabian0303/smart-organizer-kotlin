@@ -27,10 +27,12 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/libro2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/libro2" />
+        app:srcCompat="@drawable/libro2"
+        tools:srcCompat="@drawable/libro2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

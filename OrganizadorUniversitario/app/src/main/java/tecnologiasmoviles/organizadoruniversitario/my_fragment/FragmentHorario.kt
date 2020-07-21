@@ -52,7 +52,7 @@ class FragmentHorario : Fragment() {
         //========================================
 
         val botonFlotante = view.findViewById(R.id.añadirAsignatura_btn) as com.google.android.material.floatingactionbutton.FloatingActionButton
-
+        botonFlotante.setColorFilter(Color.WHITE)
         botonFlotante.setOnClickListener {
             val intent = Intent(context, agregarCursoActivity::class.java)
             startActivity(intent)
