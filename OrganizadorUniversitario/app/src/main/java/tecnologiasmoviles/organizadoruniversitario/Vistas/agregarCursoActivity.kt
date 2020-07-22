@@ -3,15 +3,15 @@ package tecnologiasmoviles.organizadoruniversitario.Vistas
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import kotlinx.android.synthetic.main.activity_agregar_curso_activuty.*
+import kotlinx.android.synthetic.main.activity_agregar_curso_activity.*
 import petrov.kristiyan.colorpicker.ColorPicker
 import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
 import tecnologiasmoviles.organizadoruniversitario.R
 
-class agregarCursoActivuty : AppCompatActivity() {
+class agregarCursoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_agregar_curso_activuty)
+        setContentView(R.layout.activity_agregar_curso_activity)
         setup()
     }
 

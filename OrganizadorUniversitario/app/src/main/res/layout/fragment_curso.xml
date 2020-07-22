@@ -15,12 +15,15 @@
         <ListView
             android:id="@+id/lista_cursos"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+        </ListView>
 
     </LinearLayout>
+
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="89dp"
+        android:layout_height="88dp"
         android:layout_gravity="bottom|right"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
@@ -35,8 +38,9 @@
             android:id="@+id/agregarCursoBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:src="@drawable/agregar" />
+            android:backgroundTint="@color/toolbar_button_add"
+            android:src="@drawable/ic_baseline_add"
+            android:tint="@color/fondo" />
 
 
     </RelativeLayout>

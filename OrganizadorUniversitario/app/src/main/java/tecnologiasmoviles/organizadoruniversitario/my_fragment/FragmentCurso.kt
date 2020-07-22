@@ -1,6 +1,7 @@
 package tecnologiasmoviles.organizadoruniversitario.my_fragment
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ListView
+import android.widget.Toolbar
 import tecnologiasmoviles.organizadoruniversitario.*
 import tecnologiasmoviles.organizadoruniversitario.Adaptadores.CursoAdapter
 import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
@@ -75,7 +77,7 @@ class FragmentCurso : Fragment() {
         lista.adapter = adapter
 
         val agregarCurso = view1.findViewById(R.id.agregarCursoBtn) as com.google.android.material.floatingactionbutton.FloatingActionButton
-
+        agregarCurso.setColorFilter(Color.WHITE)
         agregarCurso.setOnClickListener {
             val intent = Intent(activity!!, agregarCursoActivity::class.java)
             startActivity(intent)
