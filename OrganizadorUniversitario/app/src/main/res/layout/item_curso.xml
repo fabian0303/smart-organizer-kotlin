@@ -23,8 +23,10 @@
 
     <Button
         android:id="@+id/colorCursoBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="20dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:clickable="false"
         android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
