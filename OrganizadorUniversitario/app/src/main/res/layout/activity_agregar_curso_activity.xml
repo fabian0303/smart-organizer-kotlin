@@ -13,7 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="80dp"
         android:layout_marginBottom="40dp">
 
 
@@ -22,8 +22,8 @@
             android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_baseline_book_azul"
-            android:contentDescription="TODO" />
+            android:contentDescription="TODO"
+            app:srcCompat="@drawable/libro2" />
 
     </LinearLayout>
 
@@ -42,7 +42,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="Ingrese el nombre del curso"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@color/color_letras2" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -77,7 +78,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="Ingrese el nombre del profesor ( Opcional)"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@color/color_letras2" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -87,6 +89,7 @@
 
             <Button
                 android:id="@+id/cancelarCursoBtn"
+                style="@style/ButtonCancelar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
@@ -95,6 +98,7 @@
 
             <Button
                 android:id="@+id/registrarCursobtn"
+                style="@style/ButtonAceptar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"

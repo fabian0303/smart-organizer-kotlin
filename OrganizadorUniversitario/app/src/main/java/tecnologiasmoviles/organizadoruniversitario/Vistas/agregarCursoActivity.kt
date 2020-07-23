@@ -37,6 +37,7 @@ class agregarCursoActivity : AppCompatActivity() {
                 override fun setOnFastChooseColorListener(position: Int, color: Int) {
                     colorCursoSeleccionado.setBackgroundColor(color)
                     colorCuro=color
+                    //colorCursoSeleccionado.setText(color)
                 }
 
                 override fun onCancel() {
@@ -54,13 +55,16 @@ class agregarCursoActivity : AppCompatActivity() {
         cancelarInsertCurso()
     }
 
+    /**
+     * Registra un curso en la base de datos
+     */
     private fun insertCurso(){
         registrarCurso.setOnClickListener {
             if(colorCuro !=0 && nombreCurso.text.toString().isNotEmpty()){
-                //colorCursoBtn.setText("registrado")
                 var nombre=nombreCurso.text.toString()
                 val curso= Curso(nombre,colorCuro)
                 cursoDao.agregarCurso(curso)
+
                 onBackPressed()
 
             }
@@ -70,6 +74,10 @@ class agregarCursoActivity : AppCompatActivity() {
 
         }
     }
+
+    /**
+     * Nos regresa al home de nuestra app.
+     */
     private fun cancelarInsertCurso(){
         cencelarRegistro.setOnClickListener {
             onBackPressed()

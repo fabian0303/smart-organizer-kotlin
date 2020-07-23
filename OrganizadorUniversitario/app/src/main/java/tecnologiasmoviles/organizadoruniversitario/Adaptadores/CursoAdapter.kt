@@ -1,5 +1,6 @@
 package tecnologiasmoviles.organizadoruniversitario.Adaptadores
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,12 +13,15 @@ import tecnologiasmoviles.organizadoruniversitario.R
 class CursoAdapter(private val mContext: FragmentActivity, private val listacursos: List<Curso>):
     ArrayAdapter<Curso>(mContext,0,listacursos) {
 
+    @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val layout = LayoutInflater.from(mContext).inflate(R.layout.item_curso,parent,false)
 
         val curso = listacursos[position]
 
         layout.curso.text = curso.nombre
+        layout.curso.colorCursoBtn?.setBackgroundColor(curso.color)
+        //layout.curso.colorCursoBtn?.setText(curso.color)
 
         return layout
     }
