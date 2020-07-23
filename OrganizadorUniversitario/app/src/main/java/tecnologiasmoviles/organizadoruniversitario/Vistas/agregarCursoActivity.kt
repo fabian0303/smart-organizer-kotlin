@@ -6,22 +6,30 @@ import android.widget.Button
 import kotlinx.android.synthetic.main.activity_agregar_curso_activity.*
 import petrov.kristiyan.colorpicker.ColorPicker
 import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
+import tecnologiasmoviles.organizadoruniversitario.Data.AppDatabase
+import tecnologiasmoviles.organizadoruniversitario.Data.CursoDao
 import tecnologiasmoviles.organizadoruniversitario.R
 
 class agregarCursoActivity : AppCompatActivity() {
+    lateinit var cursoDao: CursoDao
+    var colorCuro = 0;
+    lateinit var colorCursoSeleccionado :Button
+    lateinit var registrarCurso :Button
+    lateinit var cencelarRegistro: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_curso_activity)
+
         setup()
     }
 
     private fun setup(){
-        var colorCuro = 0;
-        var colorCursoSeleccionado = findViewById(R.id.colorCursoBtn) as Button
-        var registrarCurso =findViewById(R.id.registrarCursobtn) as Button
-        var cencelarRegistro =findViewById(R.id.cancelarCursoBtn) as Button
-        var curso = null as Curso
-
+        //Inicializamos variables.
+        colorCursoSeleccionado = findViewById<Button>(R.id.colorCursoBtn)
+        registrarCurso= findViewById<Button>(R.id.registrarCursobtn)
+        cencelarRegistro= findViewById<Button>(R.id.cancelarCursoBtn)
+        cursoDao = AppDatabase.getInstance(this).cursoDao()
         colorCursoSeleccionado.setOnClickListener {
 
             val colorPicker = ColorPicker(this)
@@ -42,12 +50,18 @@ class agregarCursoActivity : AppCompatActivity() {
                 .show()
         }
 
+        insertCurso()
+        cancelarInsertCurso()
+    }
 
+    private fun insertCurso(){
         registrarCurso.setOnClickListener {
             if(colorCuro !=0 && nombreCurso.text.toString().isNotEmpty()){
                 //colorCursoBtn.setText("registrado")
                 var nombre=nombreCurso.text.toString()
-                //curso= Curso(nombre,colorCuro)
+                val curso= Curso(nombre,colorCuro)
+                cursoDao.agregarCurso(curso)
+                onBackPressed()
 
             }
             else{
@@ -55,6 +69,8 @@ class agregarCursoActivity : AppCompatActivity() {
             }
 
         }
+    }
+    private fun cancelarInsertCurso(){
         cencelarRegistro.setOnClickListener {
             onBackPressed()
         }
