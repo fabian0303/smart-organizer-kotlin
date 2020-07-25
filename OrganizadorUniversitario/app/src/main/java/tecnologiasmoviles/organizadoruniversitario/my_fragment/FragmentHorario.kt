@@ -3,19 +3,22 @@ package tecnologiasmoviles.organizadoruniversitario.my_fragment
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
-import android.widget.ScrollView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import tecnologiasmoviles.organizadoruniversitario.Adaptadores.CursoAdapter
+import tecnologiasmoviles.organizadoruniversitario.Clases.Bloque
+import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
+import tecnologiasmoviles.organizadoruniversitario.Data.AppDatabase
+import tecnologiasmoviles.organizadoruniversitario.Data.BloqueDao
 import tecnologiasmoviles.organizadoruniversitario.R
-import tecnologiasmoviles.organizadoruniversitario.Vistas.agregarCursoActivity
+import tecnologiasmoviles.organizadoruniversitario.Vistas.asignarBloqueActivity
 import kotlin.random.Random
 
 
@@ -25,7 +28,8 @@ private const val ARG_PARAM2 = "param2"
 
 class FragmentHorario : Fragment() {
 
-
+    lateinit var bloqueDao: BloqueDao
+    val textViews = ArrayList<TextView>()
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -51,10 +55,15 @@ class FragmentHorario : Fragment() {
 
         //========================================
 
+        bloqueDao = AppDatabase.getInstance(activity!!).bloqueDao()
+
+        val grid = view.findViewById(R.id.gridlayout) as GridLayout
+        val scrollView = view.findViewById(R.id.scrollView) as ScrollView
+
         val botonFlotante = view.findViewById(R.id.añadirAsignatura_btn) as com.google.android.material.floatingactionbutton.FloatingActionButton
         botonFlotante.setColorFilter(Color.WHITE)
         botonFlotante.setOnClickListener {
-            val intent = Intent(context, agregarCursoActivity::class.java)
+            val intent = Intent(context, asignarBloqueActivity::class.java)
             startActivity(intent)
         }
         //se muestra boton flotante por 3 segundos y luego desaparece
@@ -73,8 +82,7 @@ class FragmentHorario : Fragment() {
         val viernes_text = view.findViewById(R.id.viernesText) as TextView
         val sabado_text = view.findViewById(R.id.sabadoText) as TextView
 
-        val grid = view.findViewById(R.id.gridlayout) as GridLayout
-        val scrollView = view.findViewById(R.id.scrollView) as ScrollView
+
 
         grid.rowCount = bloques
         grid.columnCount = dias + 1
@@ -119,7 +127,7 @@ class FragmentHorario : Fragment() {
                 }
             }
             else{
-                bloqueText.width = anchoDias
+                bloqueText.width = anchoDias/*
                 bloqueText.setOnClickListener {
                     val bloque = getBloque(bloqueText.id)
                     val dia = getDia(bloqueText.id)
@@ -127,8 +135,9 @@ class FragmentHorario : Fragment() {
                     Toast.makeText(activity, "$dia | Bloque $bloque", Toast.LENGTH_SHORT).show()
                     val color: Int = Color.argb(255, Random.nextInt(256), Random.nextInt(256), Random.nextInt(256))
                     bloqueText.setBackgroundColor(color)
-                }
+                }*/
                 grid.addView(bloqueText)
+                textViews.add(bloqueText)
             }
             contador++
         }
@@ -155,6 +164,40 @@ class FragmentHorario : Fragment() {
         showHideBotonFlotante()
         // Inflate the layout for this fragment
         return view
+    }
+
+    fun setBloque(curso: String, dia: String, bloque: String, color: Int){
+        if(dia=="Lunes"){
+            val bloqueINT = bloque.toInt()
+            textViews[0+(6*(bloqueINT-1))].text = curso
+            textViews[0+(6*(bloqueINT-1))].setBackgroundColor(color)
+            textViews[0+(6*(bloqueINT-1))].invalidate()
+        }
+        else if(dia=="Martes"){
+            val bloqueINT = bloque.toInt()
+            textViews[1+(6*(bloqueINT-1))].text = curso
+            textViews[1+(6*(bloqueINT-1))].setBackgroundColor(color)
+        }
+        else if(dia=="Miercoles"){
+            val bloqueINT = bloque.toInt()
+            textViews[2+(6*(bloqueINT-1))].text = curso
+            textViews[2+(6*(bloqueINT-1))].setBackgroundColor(color)
+        }
+        else if(dia=="Jueves"){
+            val bloqueINT = bloque.toInt()
+            textViews[3+(6*(bloqueINT-1))].text = curso
+            textViews[3+(6*(bloqueINT-1))].setBackgroundColor(color)
+        }
+        else if(dia=="Viernes"){
+            val bloqueINT = bloque.toInt()
+            textViews[4+(6*(bloqueINT-1))].text = curso
+            textViews[4+(6*(bloqueINT-1))].setBackgroundColor(color)
+        }
+        else if(dia=="Sabado"){
+            val bloqueINT = bloque.toInt()
+            textViews[5+(6*(bloqueINT-1))].text = curso
+            textViews[5+(6*(bloqueINT-1))].setBackgroundColor(color)
+        }
     }
 
     fun getBloque (bloqueIndex: Int): Int {
@@ -214,7 +257,7 @@ class FragmentHorario : Fragment() {
         else if(bloqueIndex==3||bloqueIndex==10||bloqueIndex==17||bloqueIndex==24||
             bloqueIndex==31||bloqueIndex==38||bloqueIndex==45||bloqueIndex==52
             ||bloqueIndex==59||bloqueIndex==66||bloqueIndex==73||bloqueIndex==80){
-            dia = "Miércoles"
+            dia = "Miercoles"
         }
         else if(bloqueIndex==4||bloqueIndex==11||bloqueIndex==18||bloqueIndex==25||
             bloqueIndex==32||bloqueIndex==39||bloqueIndex==46||bloqueIndex==53
@@ -229,33 +272,19 @@ class FragmentHorario : Fragment() {
         else if(bloqueIndex==6||bloqueIndex==13||bloqueIndex==20||bloqueIndex==27||
             bloqueIndex==34||bloqueIndex==41||bloqueIndex==48||bloqueIndex==55
             ||bloqueIndex==62||bloqueIndex==69||bloqueIndex==76||bloqueIndex==83){
-            dia = "Sábado"
+            dia = "Sabado"
         }
 
         return dia
     }
 
-    public interface FragmentAListener{
-
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentHorario.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FragmentHorario().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onStart() {
+        super.onStart()
+        val lista_bloques = ArrayList<Bloque>(bloqueDao.obtenerBloque())
+        var contador = 0
+        while(contador < lista_bloques.size){
+            setBloque(lista_bloques[contador].nombreCurso,lista_bloques[contador].dia,lista_bloques[contador].bloque, lista_bloques[contador].color)
+            contador++
+        }
     }
 }
