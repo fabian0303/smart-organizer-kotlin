@@ -1,6 +1,6 @@
 package tecnologiasmoviles.organizadoruniversitario.Data
 
-import android.content.Context
+import androidx.fragment.app.FragmentActivity
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -19,7 +19,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         private var INSTANCE: AppDatabase? = null
 
-        fun getInstance(context: Context): AppDatabase {
+        fun getInstance(context: FragmentActivity): AppDatabase {
             if (INSTANCE == null){
                INSTANCE = Room.databaseBuilder(
                     context.applicationContext,

@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Vistas.agregarCursoActivity"></activity>
+        <activity android:name=".Vistas.asignarBloqueActivity"></activity>
         <activity android:name=".Vistas.NuevaAsignatura" />
         <activity android:name=".Adaptadores.CursoAdapter" />
         <activity android:name=".NotaDetalleAdapter" />
