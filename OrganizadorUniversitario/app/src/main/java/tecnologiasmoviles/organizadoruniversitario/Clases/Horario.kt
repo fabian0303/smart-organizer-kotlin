@@ -1,4 +1,4 @@
-package tecnologiasmoviles.organizadoruniversitario
+package tecnologiasmoviles.organizadoruniversitario.Clases
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

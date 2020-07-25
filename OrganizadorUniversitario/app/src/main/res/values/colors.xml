@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#31C4FC</color>
-    <color name="colorPrimaryDark">#2C384A</color>
+    <color name="colorPrimaryDark">#1D7A9F</color>
     <color name="colorAccent">#FF8A65</color>
     <color name="fondo">#e3f2fd</color>
     <color name="fondo_2">#31C4FC</color>
     <color name="letras">#fff</color>
     <color name="color_letras2">#000000</color>
-    <color name="toolbar_superior_color">#004c8c</color>
-    <color name="toolbar_inferior_color">#0277bd</color>
+    <color name="toolbar_superior_color">#238fba</color>
+    <color name="toolbar_inferior_color">#238fba</color>
+    <color name="toolbar_button_add">#31c4fc</color>
     <color name="fondo_fragment">#e3f2fd</color>
     <color name="color_botones">#b1bfca</color>
+    <color name="gray">#C3C2C2</color>
 </resources>

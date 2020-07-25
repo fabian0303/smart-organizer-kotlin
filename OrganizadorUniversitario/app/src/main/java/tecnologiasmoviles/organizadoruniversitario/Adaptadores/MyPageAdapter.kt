@@ -1,8 +1,11 @@
-package tecnologiasmoviles.organizadoruniversitario.my_fragment
+package tecnologiasmoviles.organizadoruniversitario.Adaptadores
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import tecnologiasmoviles.organizadoruniversitario.my_fragment.FragmentCurso
+import tecnologiasmoviles.organizadoruniversitario.my_fragment.FragmentHorario
+import tecnologiasmoviles.organizadoruniversitario.my_fragment.FragmentNota
 
 class MyPageAdapter (fm: FragmentManager) : FragmentPagerAdapter(fm){
     override fun getItem(position: Int): Fragment {

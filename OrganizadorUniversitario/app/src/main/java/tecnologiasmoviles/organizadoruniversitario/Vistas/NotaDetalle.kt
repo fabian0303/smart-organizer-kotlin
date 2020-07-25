@@ -1,11 +1,10 @@
-package tecnologiasmoviles.organizadoruniversitario
+package tecnologiasmoviles.organizadoruniversitario.Vistas
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import kotlinx.android.synthetic.main.activity_nota_detalle.*
-import kotlinx.android.synthetic.main.item_nota.*
+import tecnologiasmoviles.organizadoruniversitario.Clases.Nota
+import tecnologiasmoviles.organizadoruniversitario.R
 
 
 class NotaDetalle : AppCompatActivity() {

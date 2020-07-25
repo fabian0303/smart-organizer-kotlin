@@ -35,7 +35,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.google.firebase:firebase-analytics:17.4.4'
     implementation 'com.google.firebase:firebase-auth:19.3.2'
-    implementation 'com.google.android.gms:play-services-auth:18.0.0'
+    implementation 'com.google.android.gms:play-services-auth:18.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -50,6 +50,8 @@ dependencies {
 
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+    //libreria de color piker
+    implementation 'petrov.kristiyan:colorpicker-library:1.1.10'
 
 
 }

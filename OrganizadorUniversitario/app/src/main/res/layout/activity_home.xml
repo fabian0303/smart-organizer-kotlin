@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeActivity"
+    tools:context=".Vistas.HomeActivity"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -36,8 +36,9 @@
             app:tabIndicatorColor="#ffffff"
             app:tabMaxWidth="0dp"
             app:tabMode="fixed"
-            app:tabRippleColor="#FFFFFF"
-            app:tabTextColor="#ffffff" />
+            app:tabSelectedTextColor="@color/white"
+            app:tabRippleColor="@color/color_botones"
+            app:tabTextColor="@color/gray" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

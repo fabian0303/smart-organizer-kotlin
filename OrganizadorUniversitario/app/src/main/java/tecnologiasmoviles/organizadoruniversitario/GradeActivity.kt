@@ -3,8 +3,11 @@ package tecnologiasmoviles.organizadoruniversitario
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ListView
 import kotlinx.android.synthetic.main.activity_grade.*
+import tecnologiasmoviles.organizadoruniversitario.Adaptadores.NotasAdapter
+import tecnologiasmoviles.organizadoruniversitario.Clases.Nota
+import tecnologiasmoviles.organizadoruniversitario.Data.AppDatabase
+import tecnologiasmoviles.organizadoruniversitario.Vistas.NotaDetalle
 import tecnologiasmoviles.organizadoruniversitario.my_fragment.notaDao
 
 class GradeActivity : AppCompatActivity() {
@@ -15,7 +18,14 @@ class GradeActivity : AppCompatActivity() {
         setUp()
 
 
-        val notas_curso1 = Nota(1,1,5.toFloat(),10.toFloat(),false)
+        val notas_curso1 =
+            Nota(
+                1,
+                1,
+                5.toFloat(),
+                10.toFloat(),
+                false
+            )
         //val notas_curso2= Nota("Calculo I", arrayOf(5.5,4.3,4.0,5.2,6.0))
         //val notas_curso3 = Nota("Calculo II", arrayOf(5.0,4.0,4.0,5.0,6.0))
 
@@ -30,7 +40,11 @@ class GradeActivity : AppCompatActivity() {
 
        // val lista_notas = listOf(notas_curso1,notas_curso2,notas_curso3)
 
-        val adapter = NotasAdapter(this,lista_notas)
+        val adapter =
+            NotasAdapter(
+                this,
+                lista_notas
+            )
 
         lista.adapter = adapter
 
