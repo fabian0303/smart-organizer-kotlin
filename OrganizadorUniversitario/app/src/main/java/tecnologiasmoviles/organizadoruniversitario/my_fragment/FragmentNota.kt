@@ -8,9 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import tecnologiasmoviles.organizadoruniversitario.*
+import tecnologiasmoviles.organizadoruniversitario.Adaptadores.CursoAdapter
 import tecnologiasmoviles.organizadoruniversitario.Adaptadores.NotasAdapter
+import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
 import tecnologiasmoviles.organizadoruniversitario.Clases.Nota
 import tecnologiasmoviles.organizadoruniversitario.Data.AppDatabase
+import tecnologiasmoviles.organizadoruniversitario.Data.CursoDao
 import tecnologiasmoviles.organizadoruniversitario.Data.NotaDao
 import tecnologiasmoviles.organizadoruniversitario.Vistas.NotaDetalle
 
@@ -19,6 +22,8 @@ import tecnologiasmoviles.organizadoruniversitario.Vistas.NotaDetalle
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 lateinit var notaDao: NotaDao
+private lateinit var cursoDao1: CursoDao
+lateinit var view2: View
 
 /**
  * A simple [Fragment] subclass.
@@ -45,39 +50,30 @@ class FragmentNota : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view1 = inflater.inflate(R.layout.fragment_nota, container, false)
-        val notas_curso1 =
-            Nota(
-                1,
-                1,
-                5.toFloat(),
-                10.toFloat(),
-                false
-            )
-        //val notas_curso2= Nota("Calculo I", arrayOf(5.5,4.3,4.0,5.2,6.0))
-        //val notas_curso3 = Nota("Calculo II", arrayOf(5.0,4.0,4.0,5.0,6.0))
+        view2 = inflater.inflate(R.layout.fragment_nota, container, false)
 
-        notaDao = AppDatabase.getInstance(activity!!).notaDao()
-        notaDao.agregarNota(notas_curso1)
-
-        val lista_notas = ArrayList<Nota>(notaDao.obtenerNota())
+        cursoDao1 = AppDatabase.getInstance(activity!!).cursoDao()
 
 
-        val lista = view1.findViewById(R.id.lista1) as ListView
+        val lista_cursos = cursoDao1.obtenerCurso()
+        val lista = view2.findViewById(R.id.lista1) as ListView
         val adapter =
             NotasAdapter(
                 activity!!,
-                lista_notas
+                lista_cursos,
+                cursoDao1
             )
         lista.adapter = adapter
 
         lista.setOnItemClickListener { parent, view, position, id ->
             val intent = Intent(activity!!, NotaDetalle::class.java )
-            //intent.putExtra("Nota", lista_notas[position])
+            intent.putExtra("Curso", lista_cursos[position])
+
             startActivity(intent)
         }
+
         // Inflate the layo ut for this fragment
-        return view1
+        return view2
     }
 
 
@@ -99,5 +95,19 @@ class FragmentNota : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val lista_cursos = cursoDao1.obtenerCurso()
+        val lista = view2.findViewById(R.id.lista1) as ListView
+        val adapter =
+            NotasAdapter(
+                activity!!,
+                lista_cursos,
+                cursoDao1
+            )
+        lista.adapter = adapter
+
     }
 }

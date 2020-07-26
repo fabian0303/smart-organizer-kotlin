@@ -3,7 +3,6 @@ package tecnologiasmoviles.organizadoruniversitario.my_fragment
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,14 +11,11 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import tecnologiasmoviles.organizadoruniversitario.Adaptadores.CursoAdapter
 import tecnologiasmoviles.organizadoruniversitario.Clases.Bloque
-import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
 import tecnologiasmoviles.organizadoruniversitario.Data.AppDatabase
 import tecnologiasmoviles.organizadoruniversitario.Data.BloqueDao
 import tecnologiasmoviles.organizadoruniversitario.R
 import tecnologiasmoviles.organizadoruniversitario.Vistas.asignarBloqueActivity
-import kotlin.random.Random
 
 
 private const val ARG_PARAM1 = "param1"

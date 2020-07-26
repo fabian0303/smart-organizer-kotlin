@@ -2,6 +2,7 @@ package tecnologiasmoviles.organizadoruniversitario.Data
 
 import androidx.room.*
 import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
+import tecnologiasmoviles.organizadoruniversitario.Clases.Nota
 
 @Dao
 interface CursoDao {
@@ -17,4 +18,7 @@ interface CursoDao {
 
     @Query(value = "SELECT * FROM curso")
     fun obtenerCurso(): List<Curso>
+
+    @Query(value = "SELECT * FROM nota WHERE refCurso = :nombre_curso")
+    fun obtenerNotasDeUnCurso(nombre_curso: String): List<Nota>
 }
