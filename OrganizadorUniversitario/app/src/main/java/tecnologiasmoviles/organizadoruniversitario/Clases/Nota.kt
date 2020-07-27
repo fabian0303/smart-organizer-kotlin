@@ -5,12 +5,14 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "nota")
-class Nota(
+data class Nota(
     @PrimaryKey(autoGenerate = true)
-    val id:Int,
+    val id: Int,
 
-    @ColumnInfo val refCurso: Int,
+    @ColumnInfo val refCurso: String,
     @ColumnInfo val nota: Float,
     @ColumnInfo val porcentaje: Float,
-    @ColumnInfo  val esAprobatorio: Boolean
+    @ColumnInfo val esAprobatorio: Boolean
+
+
 )
