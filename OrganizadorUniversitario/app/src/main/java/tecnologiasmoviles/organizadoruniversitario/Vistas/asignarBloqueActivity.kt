@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_asignar_bloque.*
 import kotlinx.android.synthetic.main.item_spinner_row.view.*
 import tecnologiasmoviles.organizadoruniversitario.Adaptadores.SpinnerRowAdapter

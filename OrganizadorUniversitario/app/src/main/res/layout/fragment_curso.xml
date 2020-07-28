@@ -40,7 +40,8 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/toolbar_button_add"
             android:src="@drawable/ic_baseline_add"
-            android:tint="@color/fondo" />
+            android:tint="@color/fondo"
+            app:backgroundTint="@color/toolbar_button_add" />
 
 
     </RelativeLayout>
