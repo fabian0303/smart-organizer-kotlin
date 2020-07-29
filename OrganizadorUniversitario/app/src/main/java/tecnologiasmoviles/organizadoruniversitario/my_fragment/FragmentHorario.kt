@@ -1,6 +1,7 @@
 package tecnologiasmoviles.organizadoruniversitario.my_fragment
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
@@ -26,6 +27,14 @@ class FragmentHorario : Fragment() {
 
     lateinit var bloqueDao: BloqueDao
     val textViews = ArrayList<TextView>()
+    val horarioInicioBloques = ArrayList<String>()
+    val horarioFinBloques = ArrayList<String>()
+    var horaInicio = 8 //8 horas
+    var minutosInicio = 3 //30 minutos
+    var duracionClase = 1 //1 hora
+    var minutosReceso = 1 //10 minutos
+    var dias = 6
+    var numeroBloques = 11
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -56,19 +65,7 @@ class FragmentHorario : Fragment() {
         val grid = view.findViewById(R.id.gridlayout) as GridLayout
         val scrollView = view.findViewById(R.id.scrollView) as ScrollView
 
-        val botonFlotante = view.findViewById(R.id.añadirAsignatura_btn) as com.google.android.material.floatingactionbutton.FloatingActionButton
-        botonFlotante.setColorFilter(Color.WHITE)
-        botonFlotante.setOnClickListener {
-            val intent = Intent(context, asignarBloqueActivity::class.java)
-            startActivity(intent)
-        }
-        //se muestra boton flotante por 3 segundos y luego desaparece
-        botonFlotante.postDelayed({ botonFlotante.hide() }, 3000)
-
         val ancho = resources.displayMetrics.widthPixels
-        val height = resources.displayMetrics.heightPixels
-        var dias = 6
-        var bloques = 11
         val anchoDias = (ancho-90)/dias
 
         val lunes_text = view.findViewById(R.id.lunesText) as TextView
@@ -78,9 +75,7 @@ class FragmentHorario : Fragment() {
         val viernes_text = view.findViewById(R.id.viernesText) as TextView
         val sabado_text = view.findViewById(R.id.sabadoText) as TextView
 
-
-
-        grid.rowCount = bloques
+        grid.rowCount = numeroBloques
         grid.columnCount = dias + 1
 
         lunes_text.setText("Lun")
@@ -97,11 +92,9 @@ class FragmentHorario : Fragment() {
         sabado_text.width = anchoDias
 
         var contador = 0
-        var hora = 8
-        var minutos = 3
 
         //Ciclo para generar bloques en el horario
-        while( contador < (bloques)*(dias+1)){
+        while( contador < (numeroBloques)*(dias+1)){
 
             val bloqueText = TextView(activity)
 
@@ -111,15 +104,17 @@ class FragmentHorario : Fragment() {
             bloqueText.height = 190
             //bloqueText.gravity  = Gravity.CENTER
 
-            if(contador%7 == 0){ //discrimina las posiciones donde se muestran las horas
-                bloqueText.text = " "+hora.toString()+":"+minutos.toString()+"0"
+            if(contador%(dias+1) == 0){ //discrimina las posiciones donde se muestran las horas
+                horarioInicioBloques.add(horaInicio.toString()+":"+minutosInicio.toString()+"0")
+                horarioFinBloques.add((horaInicio+1).toString()+":"+minutosInicio.toString()+"0")
+                bloqueText.text = " "+horaInicio.toString()+":"+minutosInicio.toString()+"0"
                 bloqueText.width = 90
                 grid.addView(bloqueText)
-                hora++
-                minutos++
-                if(minutos == 6){
-                    minutos = 0
-                    hora++
+                horaInicio = horaInicio + duracionClase
+                minutosInicio = minutosInicio + minutosReceso
+                if(minutosInicio == 6){
+                    minutosInicio = 0
+                    horaInicio++
                 }
             }
             else{
@@ -145,6 +140,17 @@ class FragmentHorario : Fragment() {
         grid.addView(bloqueText)
         contador++
 
+        val botonFlotante = view.findViewById(R.id.añadirAsignatura_btn) as com.google.android.material.floatingactionbutton.FloatingActionButton
+        botonFlotante.setColorFilter(Color.WHITE)
+        botonFlotante.setOnClickListener {
+            val intent = Intent(context, asignarBloqueActivity::class.java)
+            intent.putExtra("inicio", horarioInicioBloques)
+            intent.putExtra("fin", horarioFinBloques)
+            startActivity(intent)
+        }
+        //se muestra boton flotante por 3 segundos y luego desaparece
+        botonFlotante.postDelayed({ botonFlotante.hide() }, 3000)
+
         //Funcion recursiva para mostrar/ocultar el botón flotante
         //Al tocar la pantalla, se muestra durante 3 segundos el botón flotante
         //El touch listener se desactiva y se vuelve a activar a los 3 segundos
@@ -162,40 +168,57 @@ class FragmentHorario : Fragment() {
         return view
     }
 
-    fun setBloque(curso: String, dia: String, bloque: String, color: Int){
-        if(dia=="Lunes"){
-            val bloqueINT = bloque.toInt()
-            textViews[0+(6*(bloqueINT-1))].text = curso
-            textViews[0+(6*(bloqueINT-1))].setBackgroundColor(color)
-            textViews[0+(6*(bloqueINT-1))].invalidate()
+    fun setBloque(bloque: Bloque){
+        if(bloque.dia=="Lunes"){
+            val bloqueINT = bloque.bloque.toInt()
+            textViews[0+(6*(bloqueINT-1))].text = bloque.nombreCurso
+            textViews[0+(6*(bloqueINT-1))].setBackgroundColor(bloque.color)
+            textViews[0+(6*(bloqueINT-1))].setOnClickListener({
+                clickCurso(bloque)
+            })
         }
-        else if(dia=="Martes"){
-            val bloqueINT = bloque.toInt()
-            textViews[1+(6*(bloqueINT-1))].text = curso
-            textViews[1+(6*(bloqueINT-1))].setBackgroundColor(color)
+        else if(bloque.dia=="Martes"){
+            val bloqueINT = bloque.bloque.toInt()
+            textViews[1+(6*(bloqueINT-1))].text = bloque.nombreCurso
+            textViews[1+(6*(bloqueINT-1))].setBackgroundColor(bloque.color)
+            textViews[1+(6*(bloqueINT-1))].setOnClickListener({
+                clickCurso(bloque)
+            })
         }
-        else if(dia=="Miercoles"){
-            val bloqueINT = bloque.toInt()
-            textViews[2+(6*(bloqueINT-1))].text = curso
-            textViews[2+(6*(bloqueINT-1))].setBackgroundColor(color)
+        else if(bloque.dia=="Miercoles"){
+            val bloqueINT = bloque.bloque.toInt()
+            textViews[2+(6*(bloqueINT-1))].text = bloque.nombreCurso
+            textViews[2+(6*(bloqueINT-1))].setBackgroundColor(bloque.color)
+            textViews[2+(6*(bloqueINT-1))].setOnClickListener({
+                clickCurso(bloque)
+            })
         }
-        else if(dia=="Jueves"){
-            val bloqueINT = bloque.toInt()
-            textViews[3+(6*(bloqueINT-1))].text = curso
-            textViews[3+(6*(bloqueINT-1))].setBackgroundColor(color)
+        else if(bloque.dia=="Jueves"){
+            val bloqueINT = bloque.bloque.toInt()
+            textViews[3+(6*(bloqueINT-1))].text = bloque.nombreCurso
+            textViews[3+(6*(bloqueINT-1))].setBackgroundColor(bloque.color)
+            textViews[3+(6*(bloqueINT-1))].setOnClickListener({
+                clickCurso(bloque)
+            })
         }
-        else if(dia=="Viernes"){
-            val bloqueINT = bloque.toInt()
-            textViews[4+(6*(bloqueINT-1))].text = curso
-            textViews[4+(6*(bloqueINT-1))].setBackgroundColor(color)
+        else if(bloque.dia=="Viernes"){
+            val bloqueINT = bloque.bloque.toInt()
+            textViews[4+(6*(bloqueINT-1))].text = bloque.nombreCurso
+            textViews[4+(6*(bloqueINT-1))].setBackgroundColor(bloque.color)
+            textViews[4+(6*(bloqueINT-1))].setOnClickListener({
+                clickCurso(bloque)
+            })
         }
-        else if(dia=="Sabado"){
-            val bloqueINT = bloque.toInt()
-            textViews[5+(6*(bloqueINT-1))].text = curso
-            textViews[5+(6*(bloqueINT-1))].setBackgroundColor(color)
+        else if(bloque.dia=="Sabado"){
+            val bloqueINT = bloque.bloque.toInt()
+            textViews[5+(6*(bloqueINT-1))].text = bloque.nombreCurso
+            textViews[5+(6*(bloqueINT-1))].setBackgroundColor(bloque.color)
+            textViews[5+(6*(bloqueINT-1))].setOnClickListener({
+                clickCurso(bloque)
+            })
         }
     }
-
+    /* Funciones antiguas
     fun getBloque (bloqueIndex: Int): Int {
         var bloque = 0
         if(bloqueIndex>0 && bloqueIndex<7){
@@ -273,14 +296,76 @@ class FragmentHorario : Fragment() {
 
         return dia
     }
+    */
 
     override fun onStart() {
         super.onStart()
+        getSetBloques()
+    }
+
+    fun getSetBloques(){
         val lista_bloques = ArrayList<Bloque>(bloqueDao.obtenerBloque())
         var contador = 0
         while(contador < lista_bloques.size){
-            setBloque(lista_bloques[contador].nombreCurso,lista_bloques[contador].dia,lista_bloques[contador].bloque, lista_bloques[contador].color)
+            setBloque(lista_bloques[contador])
             contador++
         }
+    }
+
+    fun clickCurso(bloque: Bloque) {
+        val cursoDialog = AlertDialog.Builder(activity).create()
+        cursoDialog.setTitle(bloque.nombreCurso)
+        cursoDialog.setMessage(bloque.dia+" bloque "+bloque.bloque+"\n" +
+                "Hora de inicio: "+bloque.horaInicio+"\n" +
+                "Hora de termino: "+bloque.horaFin
+        )
+
+        cursoDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Volver"
+        ) { dialog, which -> dialog.dismiss() }
+
+        cursoDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Eliminar"
+        ) { dialog, which ->
+            val confirmacion = AlertDialog.Builder(activity).create()
+            confirmacion.setTitle(bloque.nombreCurso)
+            confirmacion.setMessage("¿Deseas eliminarlo del horario?")
+            confirmacion.setButton(AlertDialog.BUTTON_POSITIVE, "Si")
+            {dialog, wich ->
+                eliminarCursoBloque(bloque)
+                dialog.dismiss()
+                Toast.makeText(activity, "Operación realizada", Toast.LENGTH_SHORT).show()
+            }
+            confirmacion.setButton(AlertDialog.BUTTON_NEGATIVE,"No")
+            {dialog, wich -> dialog.dismiss()}
+            confirmacion.show()
+            dialog.dismiss()
+        }
+        cursoDialog.show()
+
+        val btnPositive = cursoDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+        val btnNegative = cursoDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+
+        val layoutParams = btnPositive.layoutParams as LinearLayout.LayoutParams
+        layoutParams.weight = 10f
+        btnPositive.layoutParams = layoutParams
+        btnNegative.layoutParams = layoutParams
+    }
+
+    fun eliminarCursoBloque(bloque: Bloque){
+        bloqueDao.eliminarBloque(bloque)
+        cleanHorario()
+        getSetBloques()
+    }
+
+    fun cleanHorario(){
+        var contador = 0
+        while(contador < textViews.size){
+            textViews[contador].text=""
+            textViews[contador].setBackgroundResource(R.drawable.back)
+            contador++
+        }
+    }
+
+    fun getHorasBloque(bloque: Int){
+
     }
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="1px"
     android:orientation="vertical"
     tools:context=".Vistas.agregarCursoActivity">
 
@@ -46,7 +46,13 @@
             android:id="@+id/curso_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/spinner_border"
             android:spinnerMode="dialog" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" " />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,9 +70,9 @@
                 <TextView
                     android:id="@+id/diaText"
                     android:layout_width="58dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="43dp"
                     android:layout_weight="1"
-                    android:gravity="left"
+                    android:gravity="center|left"
                     android:text="Selecciona el día:"
 
                     android:textSize="15dp"
@@ -75,9 +81,10 @@
                 <Spinner
                     android:id="@+id/dia_spinner"
                     android:layout_width="20dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_marginBottom="20dp"
                     android:layout_weight="1"
+                    android:background="@drawable/spinner_border"
                     android:spinnerMode="dialog" />
             </LinearLayout>
 
@@ -98,10 +105,10 @@
 
                 <TextView
                     android:id="@+id/textView2"
-                    android:layout_width="55dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="400dp"
+                    android:layout_height="37dp"
                     android:layout_weight="1"
-                    android:gravity="left"
+                    android:gravity="center|left"
                     android:text="Selecciona los bloques:"
 
                     android:textSize="15dp"
@@ -109,11 +116,13 @@
 
                 <Button
                     android:id="@+id/bloque_button"
-                    android:layout_width="20dp"
+                    android:layout_width="361dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:layout_weight="1"
+                    android:background="@drawable/boton_redondeado_color_primario_dark"
                     tools:text="Ninguno" />
+
             </LinearLayout>
 
         </LinearLayout>
