@@ -8,11 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import android.widget.Toast
 import tecnologiasmoviles.organizadoruniversitario.*
 import tecnologiasmoviles.organizadoruniversitario.Adaptadores.CursoAdapter
 import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
 import tecnologiasmoviles.organizadoruniversitario.Data.AppDatabase
 import tecnologiasmoviles.organizadoruniversitario.Data.CursoDao
+import tecnologiasmoviles.organizadoruniversitario.Vistas.My_CursoActivity
+import tecnologiasmoviles.organizadoruniversitario.Vistas.NotaDetalle
 import tecnologiasmoviles.organizadoruniversitario.Vistas.agregarCursoActivity
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,21 +49,34 @@ class FragmentCurso : Fragment() {
 
         }
 
+        val lista_cursos = cursoDao.obtenerCurso()
+        val lista = view1.findViewById(R.id.lista_cursos) as ListView
+        val adapter = CursoAdapter( activity!!, lista_cursos)
+
+        lista.adapter = adapter
+        lista.setOnItemClickListener { parent, view, position, id ->
+            val intent = Intent(activity!!, My_CursoActivity::class.java )
+            intent.putExtra("Curso", lista_cursos[position])
+            //Toast.makeText(activity!!, lista_cursos[position].nombre,Toast.LENGTH_LONG).show()
+            startActivity(intent)
+        }
 
         return view1
     }
 
     override fun onStart() {
         super.onStart()
-        val lista_cursos = ArrayList<Curso>(cursoDao.obtenerCurso())
 
+        val lista_cursos = cursoDao.obtenerCurso()
         val lista = view1.findViewById(R.id.lista_cursos) as ListView
-
-        val adapter = CursoAdapter( activity!!, lista_cursos )
-
+        val adapter =
+            CursoAdapter(
+                activity!!,
+                lista_cursos
+            )
         lista.adapter = adapter
 
+
+
     }
-
-
 }
