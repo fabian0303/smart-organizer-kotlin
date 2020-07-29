@@ -13,6 +13,8 @@ class Bloque(
     @ColumnInfo val dia: String,
     @ColumnInfo val bloque: String,
     @ColumnInfo val color: Int,
+    @ColumnInfo val horaInicio: String,
+    @ColumnInfo val horaFin: String,
 
     @PrimaryKey(autoGenerate = false)
     val id:String = dia+bloque

@@ -29,19 +29,14 @@ class FragmentCurso : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-         view1 = inflater.inflate(R.layout.fragment_curso, container, false)
-        val curso1 = Curso( "Robotic",0 )
-
-
-
+        view1 = inflater.inflate(R.layout.fragment_curso, container, false)
+        val curso1 = Curso( "Tecnologías Móviles", Color.CYAN)
+        val curso2 = Curso( "Ingeniería Económica", Color.GREEN)
 
         cursoDao = AppDatabase.getInstance(activity!!).cursoDao()
 
         cursoDao.agregarCurso(curso1)
-
-
-
-
+        cursoDao.agregarCurso(curso2)
 
         val agregarCurso = view1.findViewById(R.id.agregarCursoBtn) as com.google.android.material.floatingactionbutton.FloatingActionButton
         agregarCurso.setColorFilter(Color.WHITE)
