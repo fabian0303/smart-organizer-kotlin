@@ -6,12 +6,15 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.activity_home.*
 import tecnologiasmoviles.organizadoruniversitario.Clases.Bloque
 import tecnologiasmoviles.organizadoruniversitario.Data.AppDatabase
 import tecnologiasmoviles.organizadoruniversitario.Data.BloqueDao
@@ -95,16 +98,16 @@ class FragmentHorario : Fragment() {
 
         //Ciclo para generar bloques en el horario
         while( contador < (numeroBloques)*(dias+1)){
-
+            //Se crean textview, los cuales representan los bloques en el horario
             val bloqueText = TextView(activity)
-
             bloqueText.setBackgroundResource(R.drawable.back) //borde de color gris para los textview
             bloqueText.id = contador
-            bloqueText.textSize = 11F
+            bloqueText.textSize = 12F
+            bloqueText.gravity = Gravity.CENTER_HORIZONTAL
             bloqueText.height = 190
-            //bloqueText.gravity  = Gravity.CENTER
 
-            if(contador%(dias+1) == 0){ //discrimina las posiciones donde se muestran las horas
+            //Condicion para discriminar si las posiciones corresponden a la hora (columna izquierda del horario)
+            if(contador%(dias+1) == 0){
                 horarioInicioBloques.add(horaInicio.toString()+":"+minutosInicio.toString()+"0")
                 horarioFinBloques.add((horaInicio+1).toString()+":"+minutosInicio.toString()+"0")
                 bloqueText.text = " "+horaInicio.toString()+":"+minutosInicio.toString()+"0"
@@ -118,7 +121,8 @@ class FragmentHorario : Fragment() {
                 }
             }
             else{
-                bloqueText.width = anchoDias/*
+                bloqueText.width = anchoDias
+                /*
                 bloqueText.setOnClickListener {
                     val bloque = getBloque(bloqueText.id)
                     val dia = getDia(bloqueText.id)
@@ -133,26 +137,23 @@ class FragmentHorario : Fragment() {
             contador++
         }
 
-        //se agrega un bloque vacío para temas de diseño en pantalla
+        //Se agrega un bloque vacío para temas de diseño en pantalla
         val bloqueText = TextView(activity)
         bloqueText.height = 50
         bloqueText.width = 90
         grid.addView(bloqueText)
-        contador++
 
         val botonFlotante = view.findViewById(R.id.añadirAsignatura_btn) as com.google.android.material.floatingactionbutton.FloatingActionButton
         botonFlotante.setColorFilter(Color.WHITE)
         botonFlotante.setOnClickListener {
-            val intent = Intent(context, asignarBloqueActivity::class.java)
-            intent.putExtra("inicio", horarioInicioBloques)
+            val intent = Intent(context, asignarBloqueActivity::class.java) //Se llama a la activity para asignar bloque
+            intent.putExtra("inicio", horarioInicioBloques) //Se le pasan los arreglos a la activity
             intent.putExtra("fin", horarioFinBloques)
             startActivity(intent)
         }
-        //se muestra boton flotante por 3 segundos y luego desaparece
-        botonFlotante.postDelayed({ botonFlotante.hide() }, 3000)
 
         //Funcion recursiva para mostrar/ocultar el botón flotante
-        //Al tocar la pantalla, se muestra durante 3 segundos el botón flotante
+        //Al tocar la pantalla (scrollview) se muestra durante 3 segundos el botón flotante
         //El touch listener se desactiva y se vuelve a activar a los 3 segundos
         fun showHideBotonFlotante (){
             scrollView.setOnTouchListener { view, event ->
@@ -163,8 +164,23 @@ class FragmentHorario : Fragment() {
                 false
             }
         }
+
+
+        //Se crea un listener en el TabLayout para saber si éste fragmento está seleccionado
+        //Si está seleccionado, se muestra el boton flotante por 3 segundos y luego desaparece
+        activity!!.tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                if(tab.position==1){
+                    botonFlotante.show()
+                    botonFlotante.postDelayed({ botonFlotante.hide() }, 3000)
+                }
+            }
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+            }
+            override fun onTabReselected(tab: TabLayout.Tab) {
+            }
+        })
         showHideBotonFlotante()
-        // Inflate the layout for this fragment
         return view
     }
 
@@ -361,11 +377,9 @@ class FragmentHorario : Fragment() {
         while(contador < textViews.size){
             textViews[contador].text=""
             textViews[contador].setBackgroundResource(R.drawable.back)
+            textViews[contador].setOnClickListener(null)
             contador++
         }
     }
 
-    fun getHorasBloque(bloque: Int){
-
-    }
 }
