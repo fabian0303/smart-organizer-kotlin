@@ -1,11 +1,11 @@
 package tecnologiasmoviles.organizadoruniversitario.Vistas
 
+import android.app.AlertDialog
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
 import tecnologiasmoviles.organizadoruniversitario.Adaptadores.MyPageAdapter
@@ -47,8 +47,6 @@ class HomeActivity : AppCompatActivity() {
         viewPager.adapter = fragmentAdapter
         tabLayout.setupWithViewPager(viewPager)
 
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -70,4 +68,14 @@ class HomeActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onBackPressed() {
+        val salirDialog = AlertDialog.Builder(this).create()
+        salirDialog.setTitle("¿Desea salir de la aplicación?")
+        salirDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Si"
+        ) { dialog, which -> finishAffinity() }
+
+        salirDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO"
+        ) { dialog, which -> dialog.dismiss()}
+        salirDialog.show()
+    }
 }

@@ -24,7 +24,7 @@ class asignarBloqueActivity() : AppCompatActivity() {
     var horaFin = ArrayList<String>()
     lateinit var cursoDao: CursoDao
     lateinit var bloqueDao: BloqueDao
-    lateinit var asignarBloque: Button
+    lateinit var asignarCursoBtn: Button
     lateinit var cencelarRegistro: Button
     val lista_bloques_seleccionados = mutableListOf<String>()
 
@@ -71,18 +71,18 @@ class asignarBloqueActivity() : AppCompatActivity() {
         }
         bloqueButton.text = "[]"
         builder.setPositiveButton("OK") { _, _ ->
-            bloqueButton.text = ""
+            lista_bloques_seleccionados.clear()
             for (i in 0 until bloques.size) {
                 val checked = checkedItems[i]
                 if (checked) {
                     //lista_bloques_seleccionados += bloques[i]
-                    lista_bloques_seleccionados += i.toString()
+                    lista_bloques_seleccionados += (i+1).toString()
                 }
             }
             bloqueButton.text = lista_bloques_seleccionados.toString()
         }
 
-        asignarBloque = findViewById<Button>(R.id.asignarCursoBtn)
+        asignarCursoBtn = findViewById<Button>(R.id.asignarCursoBtn)
         cencelarRegistro = findViewById<Button>(R.id.cancelarCursoBtn)
         cursoDao = AppDatabase.getInstance(this).cursoDao()
         bloqueDao = AppDatabase.getInstance(this).bloqueDao()
@@ -101,9 +101,8 @@ class asignarBloqueActivity() : AppCompatActivity() {
      * Registra un curso en la base de datos
      */
     private fun insertarBloque() {
-        asignarBloque.setOnClickListener {
+        asignarCursoBtn.setOnClickListener {
             if (lista_bloques_seleccionados.size != 0) {
-
                 val cursoSeleccionado = curso_spinner.selectedView.curso_row.text.toString()
                 val diaSeleccionado = dia_spinner.selectedItem.toString()
                 val color = curso_spinner.selectedView.color_button.backgroundTintList?.defaultColor

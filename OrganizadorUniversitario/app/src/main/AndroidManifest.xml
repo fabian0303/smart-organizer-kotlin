@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="tecnologiasmoviles.organizadoruniversitario">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,9 +16,8 @@
         <activity android:name=".Vistas.agregarNotaActivity" />
         <activity android:name=".Vistas.agregarCursoActivity" />
         <activity android:name=".Vistas.asignarBloqueActivity" />
-        <activity android:name=".Vistas.NuevaAsignatura" />
-        <activity android:name=".Adaptadores.CursoAdapter" />
-        <activity android:name=".NotaDetalleAdapter" />
+        <activity android:name=".Adaptadores.CursoAdapter"
+            tools:ignore="Instantiatable" />
         <activity android:name=".Vistas.NotaDetalle" />
         <activity android:name=".GradeActivity" />
         <activity android:name=".ScheduleActivity" />
