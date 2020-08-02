@@ -8,14 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
-import android.widget.Toast
 import tecnologiasmoviles.organizadoruniversitario.*
 import tecnologiasmoviles.organizadoruniversitario.Adaptadores.CursoAdapter
 import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
 import tecnologiasmoviles.organizadoruniversitario.Data.AppDatabase
 import tecnologiasmoviles.organizadoruniversitario.Data.CursoDao
-import tecnologiasmoviles.organizadoruniversitario.Vistas.My_CursoActivity
-import tecnologiasmoviles.organizadoruniversitario.Vistas.NotaDetalle
+import tecnologiasmoviles.organizadoruniversitario.Vistas.NavegacionCurso.Home_CursoActivity
 import tecnologiasmoviles.organizadoruniversitario.Vistas.agregarCursoActivity
 
 // TODO: Rename parameter arguments, choose names that match
@@ -55,7 +53,7 @@ class FragmentCurso : Fragment() {
 
         lista.adapter = adapter
         lista.setOnItemClickListener { parent, view, position, id ->
-            val intent = Intent(activity!!, My_CursoActivity::class.java )
+            val intent = Intent(activity!!, Home_CursoActivity::class.java )
             intent.putExtra("Curso", lista_cursos[position])
             //Toast.makeText(activity!!, lista_cursos[position].nombre,Toast.LENGTH_LONG).show()
             startActivity(intent)
