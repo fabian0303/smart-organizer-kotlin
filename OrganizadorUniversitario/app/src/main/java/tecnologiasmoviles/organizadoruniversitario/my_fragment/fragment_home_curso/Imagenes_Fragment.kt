@@ -8,7 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import tecnologiasmoviles.organizadoruniversitario.R
+import tecnologiasmoviles.organizadoruniversitario.Vistas.NavegacionCurso.OpcionesImagenActivity
+import tecnologiasmoviles.organizadoruniversitario.Vistas.NotaDetalle
 import tecnologiasmoviles.organizadoruniversitario.Vistas.agregarCursoActivity
 import tecnologiasmoviles.organizadoruniversitario.my_fragment.view1
 
@@ -38,12 +41,13 @@ class Imagenes_Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         view1 =inflater.inflate(R.layout.fragment_imagenes, container, false)
-        
+
         val agregarFoto = view1.findViewById(R.id.agregarFotoBtn) as com.google.android.material.floatingactionbutton.FloatingActionButton
         agregarFoto.setColorFilter(Color.WHITE)
         agregarFoto.setOnClickListener {
 
-
+            val intent = Intent(activity!!, OpcionesImagenActivity::class.java )
+            startActivity(intent)
         }
 
         return view1
