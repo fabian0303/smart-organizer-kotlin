@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
@@ -102,7 +104,8 @@ class FragmentHorario : Fragment() {
             val bloqueText = TextView(activity)
             bloqueText.setBackgroundResource(R.drawable.back) //borde de color gris para los textview
             bloqueText.id = contador
-            bloqueText.textSize = 12F
+            bloqueText.textSize = 10F
+            bloqueText.setTypeface(Typeface.DEFAULT_BOLD)
             bloqueText.gravity = Gravity.CENTER_HORIZONTAL
             bloqueText.height = 190
 
@@ -122,6 +125,7 @@ class FragmentHorario : Fragment() {
             }
             else{
                 bloqueText.width = anchoDias
+                bloqueText.setTextColor(Color.WHITE)
                 /*
                 bloqueText.setOnClickListener {
                     val bloque = getBloque(bloqueText.id)
@@ -185,10 +189,15 @@ class FragmentHorario : Fragment() {
     }
 
     fun setBloque(bloque: Bloque){
+        val gd = GradientDrawable()
+        gd.setColor(bloque.color) // Changes this drawbale to use a single color instead of a gradient
+        //gd.cornerRadius = 5f
+        gd.setStroke(2, Color.parseColor("#808080"))
         if(bloque.dia=="Lunes"){
             val bloqueINT = bloque.bloque.toInt()
             textViews[0+(6*(bloqueINT-1))].text = bloque.nombreCurso
-            textViews[0+(6*(bloqueINT-1))].setBackgroundColor(bloque.color)
+            textViews[0+(6*(bloqueINT-1))].background = gd
+            //textViews[0+(6*(bloqueINT-1))].setBackgroundColor(bloque.color)
             textViews[0+(6*(bloqueINT-1))].setOnClickListener({
                 clickCurso(bloque)
             })
@@ -196,7 +205,7 @@ class FragmentHorario : Fragment() {
         else if(bloque.dia=="Martes"){
             val bloqueINT = bloque.bloque.toInt()
             textViews[1+(6*(bloqueINT-1))].text = bloque.nombreCurso
-            textViews[1+(6*(bloqueINT-1))].setBackgroundColor(bloque.color)
+            textViews[1+(6*(bloqueINT-1))].background = gd
             textViews[1+(6*(bloqueINT-1))].setOnClickListener({
                 clickCurso(bloque)
             })
@@ -204,7 +213,7 @@ class FragmentHorario : Fragment() {
         else if(bloque.dia=="Miercoles"){
             val bloqueINT = bloque.bloque.toInt()
             textViews[2+(6*(bloqueINT-1))].text = bloque.nombreCurso
-            textViews[2+(6*(bloqueINT-1))].setBackgroundColor(bloque.color)
+            textViews[2+(6*(bloqueINT-1))].background = gd
             textViews[2+(6*(bloqueINT-1))].setOnClickListener({
                 clickCurso(bloque)
             })
@@ -212,7 +221,7 @@ class FragmentHorario : Fragment() {
         else if(bloque.dia=="Jueves"){
             val bloqueINT = bloque.bloque.toInt()
             textViews[3+(6*(bloqueINT-1))].text = bloque.nombreCurso
-            textViews[3+(6*(bloqueINT-1))].setBackgroundColor(bloque.color)
+            textViews[3+(6*(bloqueINT-1))].background = gd
             textViews[3+(6*(bloqueINT-1))].setOnClickListener({
                 clickCurso(bloque)
             })
@@ -220,7 +229,7 @@ class FragmentHorario : Fragment() {
         else if(bloque.dia=="Viernes"){
             val bloqueINT = bloque.bloque.toInt()
             textViews[4+(6*(bloqueINT-1))].text = bloque.nombreCurso
-            textViews[4+(6*(bloqueINT-1))].setBackgroundColor(bloque.color)
+            textViews[4+(6*(bloqueINT-1))].background = gd
             textViews[4+(6*(bloqueINT-1))].setOnClickListener({
                 clickCurso(bloque)
             })
@@ -228,7 +237,7 @@ class FragmentHorario : Fragment() {
         else if(bloque.dia=="Sabado"){
             val bloqueINT = bloque.bloque.toInt()
             textViews[5+(6*(bloqueINT-1))].text = bloque.nombreCurso
-            textViews[5+(6*(bloqueINT-1))].setBackgroundColor(bloque.color)
+            textViews[5+(6*(bloqueINT-1))].background = gd
             textViews[5+(6*(bloqueINT-1))].setOnClickListener({
                 clickCurso(bloque)
             })
@@ -328,6 +337,7 @@ class FragmentHorario : Fragment() {
         }
     }
 
+    @SuppressLint("ResourceAsColor")
     fun clickCurso(bloque: Bloque) {
         val cursoDialog = AlertDialog.Builder(activity).create()
         cursoDialog.setTitle(bloque.nombreCurso)
@@ -353,13 +363,17 @@ class FragmentHorario : Fragment() {
             confirmacion.setButton(AlertDialog.BUTTON_NEGATIVE,"No")
             {dialog, wich -> dialog.dismiss()}
             confirmacion.show()
+            confirmacion.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1D7A9F"))
+            confirmacion.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1D7A9F"))
             dialog.dismiss()
         }
-        cursoDialog.show()
+        cursoDialog.show() //se muestra el dialog
 
+        //Configuraciones de botones del cursoDialog
         val btnPositive = cursoDialog.getButton(AlertDialog.BUTTON_POSITIVE)
         val btnNegative = cursoDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
-
+        btnPositive.setTextColor(Color.parseColor("#1D7A9F"))
+        btnNegative.setTextColor(Color.parseColor("#1D7A9F"))
         val layoutParams = btnPositive.layoutParams as LinearLayout.LayoutParams
         layoutParams.weight = 10f
         btnPositive.layoutParams = layoutParams

@@ -160,5 +160,18 @@ class AuthActivity : AppCompatActivity() {
         startActivity(homeIntent)
     }
 
+    override fun onBackPressed() {
+        val salirDialog = android.app.AlertDialog.Builder(this).create()
+        salirDialog.setTitle("¿Desea salir de la aplicación?")
+        salirDialog.setButton(
+            android.app.AlertDialog.BUTTON_POSITIVE, "Si"
+        ) { dialog, which -> finishAffinity() }
+
+        salirDialog.setButton(
+            android.app.AlertDialog.BUTTON_NEGATIVE, "NO"
+        ) { dialog, which -> dialog.dismiss()}
+        salirDialog.show()
+    }
+
 }
 

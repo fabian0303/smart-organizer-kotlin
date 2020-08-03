@@ -1,5 +1,6 @@
 package tecnologiasmoviles.organizadoruniversitario.Vistas
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -57,12 +58,11 @@ class agregarNotaActivity : AppCompatActivity() {
                 }
                 val nota = Nota(0,curso.nombre,nota1.toFloat(),porcentaje.toFloat(),aproba)
                 notaDao.agregarNota(nota)
-                finish()
-
-
+                onBackPressed()
+                Toast.makeText(this, "Nota creada exitosamente", Toast.LENGTH_SHORT).show()
             }
             else{
-                Toast.makeText(this, "Por favor ingrese los datos solicitados", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Por favor ingresa los datos solicitados", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -73,7 +73,18 @@ class agregarNotaActivity : AppCompatActivity() {
      */
     private fun cancelarInsercion(){
         cancelarRegistro.setOnClickListener {
-            onBackPressed()
+            val confirmacion = android.app.AlertDialog.Builder(this).create()
+            confirmacion.setTitle("¿Cancelar operación?")
+            confirmacion.setButton(android.app.AlertDialog.BUTTON_POSITIVE, "Si")
+            {dialog, wich ->
+                dialog.dismiss()
+                onBackPressed()
+            }
+            confirmacion.setButton(android.app.AlertDialog.BUTTON_NEGATIVE,"No")
+            {dialog, wich -> dialog.dismiss()}
+            confirmacion.show()
+            confirmacion.getButton(android.app.AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1D7A9F"))
+            confirmacion.getButton(android.app.AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1D7A9F"))
         }
     }
 

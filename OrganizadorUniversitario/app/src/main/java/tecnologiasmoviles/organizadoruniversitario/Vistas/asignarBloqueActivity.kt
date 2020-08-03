@@ -1,6 +1,7 @@
 package tecnologiasmoviles.organizadoruniversitario.Vistas
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -59,12 +60,13 @@ class asignarBloqueActivity() : AppCompatActivity() {
         val bloques: Array<String> = bloquesAux.toTypedArray()
         val checkedItems: BooleanArray = checkedAux.toBooleanArray()
 
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this, R.style.CheckBoxItemColor)
         builder.setTitle("Selecciona los bloques que deseas asignar")
         val bloqueButton = findViewById(R.id.bloque_button) as Button
         bloqueButton.setOnClickListener {
             val dialog = builder.create()
             dialog.show()
+            dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1D7A9F"))
         }
         builder.setMultiChoiceItems(bloques, checkedItems) { dialog, which, isChecked ->
             checkedItems[which] = isChecked
@@ -81,7 +83,6 @@ class asignarBloqueActivity() : AppCompatActivity() {
             }
             bloqueButton.text = lista_bloques_seleccionados.toString()
         }
-
         asignarCursoBtn = findViewById<Button>(R.id.asignarCursoBtn)
         cencelarRegistro = findViewById<Button>(R.id.cancelarCursoBtn)
         cursoDao = AppDatabase.getInstance(this).cursoDao()
@@ -123,7 +124,7 @@ class asignarBloqueActivity() : AppCompatActivity() {
                     }
                 }
                 onBackPressed()
-                Toast.makeText(this, "Curso asignado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Curso asignado exitosamente", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "Por favor ingresa los datos solicitados", Toast.LENGTH_SHORT).show()
             }
@@ -135,7 +136,18 @@ class asignarBloqueActivity() : AppCompatActivity() {
      */
     private fun cancelarInsercion() {
         cencelarRegistro.setOnClickListener {
-            onBackPressed()
+            val confirmacion = android.app.AlertDialog.Builder(this).create()
+            confirmacion.setTitle("¿Cancelar operación?")
+            confirmacion.setButton(android.app.AlertDialog.BUTTON_POSITIVE, "Si")
+            {dialog, wich ->
+                dialog.dismiss()
+                onBackPressed()
+            }
+            confirmacion.setButton(android.app.AlertDialog.BUTTON_NEGATIVE,"No")
+            {dialog, wich -> dialog.dismiss()}
+            confirmacion.show()
+            confirmacion.getButton(android.app.AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1D7A9F"))
+            confirmacion.getButton(android.app.AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1D7A9F"))
         }
     }
 

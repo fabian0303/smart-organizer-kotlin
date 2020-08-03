@@ -2,6 +2,7 @@ package tecnologiasmoviles.organizadoruniversitario.Vistas
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -57,12 +58,23 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id= item.itemId;
         if(id == R.id.cerrarSesion){
-            title = "Inicio"
-            val prefs = getSharedPreferences(getString(R.string.prefs_file),Context.MODE_PRIVATE).edit()
-            prefs.clear()
-            prefs.apply()
-            FirebaseAuth.getInstance().signOut()
-            onBackPressed()
+            val salirDialog = AlertDialog.Builder(this).create() //se crea un dialog para confirmar el cierre de sesión
+            salirDialog.setTitle("¿Desea cerrar sesión?")
+            salirDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Si"
+            ) { dialog, which ->
+                title = "Inicio"
+                val prefs = getSharedPreferences(getString(R.string.prefs_file),Context.MODE_PRIVATE).edit()
+                prefs.clear()
+                prefs.apply()
+                FirebaseAuth.getInstance().signOut()
+                val intent = Intent(this, AuthActivity::class.java)
+                this.finish() //se finaliza la activity actual para llamar a la activity de autenticacinon
+                startActivity(intent)
+            }
+            salirDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO"
+            ) { dialog, which -> dialog.dismiss()}
+            salirDialog.show()
+            //onBackPressed()
 
         }
         return super.onOptionsItemSelected(item)

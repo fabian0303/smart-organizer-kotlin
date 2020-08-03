@@ -80,14 +80,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/colorPrimaryDark"
                 android:text="Iniciar sesión"
-                 />
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/signUpButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/colorPrimary"
                 android:text="Registrar"
                 android:textColor="@android:color/white" />
 
