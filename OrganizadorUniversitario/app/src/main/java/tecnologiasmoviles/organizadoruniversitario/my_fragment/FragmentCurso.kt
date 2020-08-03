@@ -16,8 +16,6 @@ import tecnologiasmoviles.organizadoruniversitario.Data.CursoDao
 import tecnologiasmoviles.organizadoruniversitario.Vistas.NavegacionCurso.Home_CursoActivity
 import tecnologiasmoviles.organizadoruniversitario.Vistas.agregarCursoActivity
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 lateinit var cursoDao: CursoDao
@@ -39,6 +37,11 @@ class FragmentCurso : Fragment() {
         cursoDao.agregarCurso(curso1)
         cursoDao.agregarCurso(curso2)
 
+
+
+        val lista_cursos = cursoDao.obtenerCurso()
+        val lista = view1.findViewById(R.id.lista_cursos) as ListView
+        val adapter = CursoAdapter( activity!!, lista_cursos)
         val agregarCurso = view1.findViewById(R.id.agregarCursoBtn) as com.google.android.material.floatingactionbutton.FloatingActionButton
         agregarCurso.setColorFilter(Color.WHITE)
         agregarCurso.setOnClickListener {
@@ -47,24 +50,22 @@ class FragmentCurso : Fragment() {
 
         }
 
-        val lista_cursos = cursoDao.obtenerCurso()
-        val lista = view1.findViewById(R.id.lista_cursos) as ListView
-        val adapter = CursoAdapter( activity!!, lista_cursos)
-
         lista.adapter = adapter
-        lista.setOnItemClickListener { parent, view, position, id ->
-            val intent = Intent(activity!!, Home_CursoActivity::class.java )
-            intent.putExtra("Curso", lista_cursos[position])
-            //Toast.makeText(activity!!, lista_cursos[position].nombre,Toast.LENGTH_LONG).show()
-            startActivity(intent)
-        }
+
+
 
         return view1
     }
 
     override fun onStart() {
         super.onStart()
+        irAcurso()
 
+
+
+    }
+
+    private fun irAcurso(){
         val lista_cursos = cursoDao.obtenerCurso()
         val lista = view1.findViewById(R.id.lista_cursos) as ListView
         val adapter =
@@ -73,8 +74,11 @@ class FragmentCurso : Fragment() {
                 lista_cursos
             )
         lista.adapter = adapter
-
-
-
+        lista.setOnItemClickListener { parent, view, position, id ->
+            val intent = Intent(activity!!, Home_CursoActivity::class.java )
+            intent.putExtra("Curso", lista_cursos[position])
+            //Toast.makeText(activity!!, lista_cursos[position].nombre,Toast.LENGTH_LONG).show()
+            startActivity(intent)
+        }
     }
 }
