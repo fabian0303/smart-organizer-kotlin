@@ -7,35 +7,38 @@
     android:layout_height="wrap_content"
     tools:layout_editor_absoluteY="25dp">
 
-    <Button
-        android:id="@+id/nota"
+    <ImageView
+        android:id="@+id/imageCurso"
         android:layout_width="63dp"
         android:layout_height="63dp"
-        android:layout_marginStart="24dp"
+        android:layout_margin="10dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/roundforma"
         android:clickable="false"
         android:enabled="false"
-        android:text="Button"
-        android:textColor="@color/common_google_signin_btn_text_light_pressed"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/libro2" />
 
     <TextView
-        android:id="@+id/nombreCurso"
+        android:id="@+id/Comentario_imagen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
         android:clickable="false"
         android:enabled="true"
         android:text="TextView"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/nota"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.423"
+        app:layout_constraintStart_toEndOf="@+id/imageCurso"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

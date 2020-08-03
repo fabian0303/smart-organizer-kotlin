@@ -5,6 +5,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,10 +18,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Vistas.agregarNotaActivity"></activity>
+        <activity android:name=".Vistas.NavegacionCurso.OpcionesImagenActivity"></activity>
+        <activity android:name=".Vistas.NavegacionCurso.Home_CursoActivity" />
+        <activity android:name=".Vistas.agregarNotaActivity" />
         <activity android:name=".Vistas.agregarCursoActivity" />
         <activity android:name=".Vistas.asignarBloqueActivity" />
-        <activity android:name=".Adaptadores.CursoAdapter"
+        <activity
+            android:name=".Adaptadores.CursoAdapter"
             tools:ignore="Instantiatable" />
         <activity android:name=".Vistas.NotaDetalle" />
         <activity android:name=".GradeActivity" />
