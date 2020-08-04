@@ -3,6 +3,9 @@ package tecnologiasmoviles.organizadoruniversitario.Vistas.NavegacionCurso
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_home.toolBar
+import kotlinx.android.synthetic.main.activity_home.viewPager
+import kotlinx.android.synthetic.main.activity_home__curso.*
 import tecnologiasmoviles.organizadoruniversitario.Adaptadores.MyPageAdapter_curso
 import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
 import tecnologiasmoviles.organizadoruniversitario.R

@@ -13,18 +13,18 @@
         app:tint="@color/gray" />
 
     <item
+        android:id="@+id/configuracion_horario"
+        app:tint="@color/gray"
+        android:title="Configuración de horario"
+        >
+    </item>
+
+    <item
         android:id="@+id/cerrarSesion"
         app:tint="@color/gray"
         android:title="Cerrar Sesion"
         >
 
-    </item>
-
-    <item
-        android:id="@+id/configuracion_horario"
-        app:tint="@color/gray"
-        android:title="Configuración de horario"
-        >
     </item>
 
 </menu>
