@@ -2,6 +2,7 @@ package tecnologiasmoviles.organizadoruniversitario.Vistas
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -171,6 +172,8 @@ class AuthActivity : AppCompatActivity() {
             android.app.AlertDialog.BUTTON_NEGATIVE, "NO"
         ) { dialog, which -> dialog.dismiss()}
         salirDialog.show()
+        salirDialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1D7A9F"))
+        salirDialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1D7A9F"))
     }
 
 }

@@ -23,9 +23,8 @@
         <activity android:name=".Vistas.agregarNotaActivity" />
         <activity android:name=".Vistas.agregarCursoActivity" />
         <activity android:name=".Vistas.asignarBloqueActivity" />
-        <activity
-            android:name=".Adaptadores.CursoAdapter"
-            tools:ignore="Instantiatable" />
+        <activity android:name=".Vistas.configurarHorarioActivity" />
+        <activity android:name=".Adaptadores.CursoAdapter" tools:ignore="Instantiatable" />
         <activity android:name=".Vistas.NotaDetalle" />
         <activity android:name=".GradeActivity" />
         <activity android:name=".ScheduleActivity" />

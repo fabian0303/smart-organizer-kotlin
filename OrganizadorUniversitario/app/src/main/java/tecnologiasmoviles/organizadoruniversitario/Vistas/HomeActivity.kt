@@ -3,9 +3,13 @@ package tecnologiasmoviles.organizadoruniversitario.Vistas
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
@@ -74,8 +78,14 @@ class HomeActivity : AppCompatActivity() {
             salirDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO"
             ) { dialog, which -> dialog.dismiss()}
             salirDialog.show()
+            salirDialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1D7A9F"))
+            salirDialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1D7A9F"))
             //onBackPressed()
 
+        }
+        else if(id == R.id.configuracion_horario){
+            val intent = Intent(this, configurarHorarioActivity::class.java)
+            startActivity(intent)
         }
         return super.onOptionsItemSelected(item)
     }
@@ -89,5 +99,7 @@ class HomeActivity : AppCompatActivity() {
         salirDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO"
         ) { dialog, which -> dialog.dismiss()}
         salirDialog.show()
+        salirDialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1D7A9F"))
+        salirDialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1D7A9F"))
     }
 }

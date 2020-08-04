@@ -19,4 +19,12 @@
         >
 
     </item>
+
+    <item
+        android:id="@+id/configuracion_horario"
+        app:tint="@color/gray"
+        android:title="Configuración de horario"
+        >
+    </item>
+
 </menu>
