@@ -2,16 +2,14 @@ package tecnologiasmoviles.organizadoruniversitario.my_fragment
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
@@ -134,6 +132,20 @@ class FragmentHorario : Fragment() {
             else{
                 bloqueText.width = anchoDias
                 bloqueText.setTextColor(Color.WHITE)
+                bloqueText.setOnLongClickListener{
+
+                    val bloque = getBloque(bloqueText.id)
+                    val dia = getDia(bloqueText.id)
+                    //Toast.makeText(activity, "$dia | Bloque $bloque", Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent(context, asignarBloqueActivity::class.java) //Se llama a la activity para asignar bloque
+                    intent.putExtra("inicio", horarioInicioBloques) //Se le pasan los arreglos a la activity
+                    intent.putExtra("fin", horarioFinBloques)
+                    intent.putExtra("bloque", bloque)
+                    intent.putExtra("dia", dia)
+                    startActivity(intent)
+                    true
+                }
                 /*
                 bloqueText.setOnClickListener {
                     val bloque = getBloque(bloqueText.id)
@@ -253,7 +265,7 @@ class FragmentHorario : Fragment() {
             })
         }
     }
-    /* Funciones antiguas
+
     fun getBloque (bloqueIndex: Int): Int {
         var bloque = 0
         if(bloqueIndex>0 && bloqueIndex<7){
@@ -292,6 +304,15 @@ class FragmentHorario : Fragment() {
         else if(bloqueIndex>77 && bloqueIndex<84){
             bloque = 12
         }
+        else if(bloqueIndex>84 && bloqueIndex<91){
+            bloque = 13
+        }
+        else if(bloqueIndex>91 && bloqueIndex<98){
+            bloque = 14
+        }
+        else if(bloqueIndex>98 && bloqueIndex<105){
+            bloque = 15
+        }
         return bloque
     }
 
@@ -300,38 +321,44 @@ class FragmentHorario : Fragment() {
 
         if(bloqueIndex==1||bloqueIndex==8||bloqueIndex==15||bloqueIndex==22||
             bloqueIndex==29||bloqueIndex==36||bloqueIndex==43||bloqueIndex==50
-            ||bloqueIndex==57||bloqueIndex==64||bloqueIndex==71||bloqueIndex==78){
-            dia = "Lunes"
+            ||bloqueIndex==57||bloqueIndex==64||bloqueIndex==71||bloqueIndex==78
+             ||bloqueIndex==85||bloqueIndex==92||bloqueIndex==99||bloqueIndex==106){
+            dia = "lu"
         }
         else if(bloqueIndex==2||bloqueIndex==9||bloqueIndex==16||bloqueIndex==23||
             bloqueIndex==30||bloqueIndex==37||bloqueIndex==44||bloqueIndex==51
-            ||bloqueIndex==58||bloqueIndex==65||bloqueIndex==72||bloqueIndex==79){
-            dia = "Martes"
+            ||bloqueIndex==58||bloqueIndex==65||bloqueIndex==72||bloqueIndex==79
+             ||bloqueIndex==86||bloqueIndex==93||bloqueIndex==100||bloqueIndex==107){
+            dia = "ma"
         }
         else if(bloqueIndex==3||bloqueIndex==10||bloqueIndex==17||bloqueIndex==24||
             bloqueIndex==31||bloqueIndex==38||bloqueIndex==45||bloqueIndex==52
-            ||bloqueIndex==59||bloqueIndex==66||bloqueIndex==73||bloqueIndex==80){
-            dia = "Miercoles"
+            ||bloqueIndex==59||bloqueIndex==66||bloqueIndex==73||bloqueIndex==80
+            ||bloqueIndex==87||bloqueIndex==94||bloqueIndex==101||bloqueIndex==108){
+            dia = "mi"
         }
         else if(bloqueIndex==4||bloqueIndex==11||bloqueIndex==18||bloqueIndex==25||
             bloqueIndex==32||bloqueIndex==39||bloqueIndex==46||bloqueIndex==53
-            ||bloqueIndex==60||bloqueIndex==67||bloqueIndex==74||bloqueIndex==81){
-            dia = "Jueves"
+            ||bloqueIndex==60||bloqueIndex==67||bloqueIndex==74||bloqueIndex==81
+            ||bloqueIndex==88||bloqueIndex==95||bloqueIndex==102||bloqueIndex==109){
+            dia = "ju"
         }
         else if(bloqueIndex==5||bloqueIndex==12||bloqueIndex==19||bloqueIndex==26||
             bloqueIndex==33||bloqueIndex==40||bloqueIndex==47||bloqueIndex==54
-            ||bloqueIndex==61||bloqueIndex==68||bloqueIndex==75||bloqueIndex==82){
-            dia = "Viernes"
+            ||bloqueIndex==61||bloqueIndex==68||bloqueIndex==75||bloqueIndex==82
+            ||bloqueIndex==89||bloqueIndex==96||bloqueIndex==103||bloqueIndex==110){
+            dia = "vi"
         }
         else if(bloqueIndex==6||bloqueIndex==13||bloqueIndex==20||bloqueIndex==27||
             bloqueIndex==34||bloqueIndex==41||bloqueIndex==48||bloqueIndex==55
-            ||bloqueIndex==62||bloqueIndex==69||bloqueIndex==76||bloqueIndex==83){
-            dia = "Sabado"
+            ||bloqueIndex==62||bloqueIndex==69||bloqueIndex==76||bloqueIndex==83
+            ||bloqueIndex==90||bloqueIndex==97||bloqueIndex==104||bloqueIndex==111){
+            dia = "sa"
         }
 
         return dia
     }
-    */
+
 
     override fun onStart() {
         super.onStart()

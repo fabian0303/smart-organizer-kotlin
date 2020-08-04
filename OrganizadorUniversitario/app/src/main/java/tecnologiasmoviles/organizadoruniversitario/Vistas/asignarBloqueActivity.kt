@@ -94,6 +94,32 @@ class asignarBloqueActivity() : AppCompatActivity() {
         curso_spinner.prompt = "Selecciona un curso"
         curso_spinner.adapter = adapter
 
+        if(bundle["dia"]!=null && bundle["bloque"]!=null){
+            var bloque = bundle["bloque"].toString().toInt()
+            var dia = bundle["dia"].toString()
+            bloqueButton.setText("[$bloque]")
+            lista_bloques_seleccionados.add(bloque.toString())
+            checkedItems[bloque-1] = true
+            if(dia=="lu"){
+                dia_spinner.setSelection(0)
+            }
+            else if(dia=="ma"){
+                dia_spinner.setSelection(1)
+            }
+            else if(dia=="mi"){
+                dia_spinner.setSelection(2)
+            }
+            else if(dia=="ju"){
+                dia_spinner.setSelection(3)
+            }
+            else if(dia=="vi"){
+                dia_spinner.setSelection(4)
+            }
+            else if(dia=="sa"){
+                dia_spinner.setSelection(5)
+            }
+        }
+
         insertarBloque()
         cancelarInsercion()
     }

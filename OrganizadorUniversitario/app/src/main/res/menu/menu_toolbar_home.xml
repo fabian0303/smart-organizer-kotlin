@@ -20,6 +20,13 @@
     </item>
 
     <item
+        android:id="@+id/limpiar_horario"
+        app:tint="@color/gray"
+        android:title="Limpiar horario"
+        >
+    </item>
+
+    <item
         android:id="@+id/cerrarSesion"
         app:tint="@color/gray"
         android:title="Cerrar Sesion"

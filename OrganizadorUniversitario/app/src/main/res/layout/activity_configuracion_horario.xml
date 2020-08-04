@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="1px"
+    android:background="#FFFFFF"
     android:orientation="vertical"
     tools:context=".Vistas.configurarHorarioActivity">
 
@@ -35,7 +36,7 @@
             android:layout_gravity="clip_horizontal|center_horizontal"
             android:layout_weight="1"
             android:contentDescription="TODO"
-            app:srcCompat="@drawable/icono_app"/>
+            app:srcCompat="@drawable/icono_app" />
 
         <TextView
             android:layout_width="match_parent"
@@ -220,4 +221,5 @@
         </LinearLayout>
 
     </LinearLayout>
+
 </LinearLayout>
