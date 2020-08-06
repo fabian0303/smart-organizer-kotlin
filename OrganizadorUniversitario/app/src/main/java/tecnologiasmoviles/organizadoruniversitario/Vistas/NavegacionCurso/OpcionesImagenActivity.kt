@@ -40,6 +40,7 @@ class OpcionesImagenActivity : AppCompatActivity() {
         }
 
         tomarFotografia()
+        guardarImagen()
     }
 //verificamos si el usuario le dio permiso a la app, para acceder a la galeria.
     override fun onRequestPermissionsResult( requestCode: Int, permissions: Array<out String>, grantResults: IntArray ) {
@@ -104,5 +105,9 @@ class OpcionesImagenActivity : AppCompatActivity() {
         val camaraIntent  = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         camaraIntent.putExtra(MediaStore.EXTRA_OUTPUT, foto)
         startActivityForResult(camaraIntent,REQUEST_FOTO)
+    }
+
+    private fun guardarImagen(){
+
     }
 }
