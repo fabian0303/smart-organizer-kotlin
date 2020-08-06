@@ -1,11 +1,15 @@
 package tecnologiasmoviles.organizadoruniversitario.Vistas
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_configuracion_horario.*
 import tecnologiasmoviles.organizadoruniversitario.Clases.Horario
 import tecnologiasmoviles.organizadoruniversitario.Data.AppDatabase
@@ -65,7 +69,7 @@ class configurarHorarioActivity : AppCompatActivity() {
                         {dialog, wich ->
                             horarioDao.actualizarHorario(horario_aux)
                             deleteNullPointerBloques()
-                            val intent = Intent(baseContext, HomeActivity::class.java)
+                            val intent = Intent(baseContext, AuthActivity::class.java)
                             startActivity(intent)
                             Toast.makeText(this, "Horario configurado exitosamente", Toast.LENGTH_SHORT).show()
                         }
@@ -77,7 +81,7 @@ class configurarHorarioActivity : AppCompatActivity() {
                     }
                     else{
                         horarioDao.actualizarHorario(horario_aux)
-                        val intent = Intent(baseContext, HomeActivity::class.java)
+                        val intent = Intent(baseContext, AuthActivity::class.java)
                         startActivity(intent)
                         Toast.makeText(this, "Horario configurado exitosamente", Toast.LENGTH_SHORT).show()
                     }
