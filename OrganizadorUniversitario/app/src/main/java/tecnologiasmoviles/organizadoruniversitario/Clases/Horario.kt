@@ -6,12 +6,13 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "horario")
 class Horario(
-    @PrimaryKey(autoGenerate = true)
-    val id:Int,
 
-    @ColumnInfo val refCurso: Int,
-    @ColumnInfo val refBloque: Int,
-    @ColumnInfo val dia: String,
-    @ColumnInfo val sala: String,
-    @ColumnInfo val color: String
+    @PrimaryKey(autoGenerate = false)
+    val id:Int,
+    @ColumnInfo val horaInicio: Int,
+    @ColumnInfo val minutosInicio: Int,
+    @ColumnInfo val duracionBloque: Int,
+    @ColumnInfo val minutosReceso: Int,
+    @ColumnInfo val numeroBloques: Int
+
 )

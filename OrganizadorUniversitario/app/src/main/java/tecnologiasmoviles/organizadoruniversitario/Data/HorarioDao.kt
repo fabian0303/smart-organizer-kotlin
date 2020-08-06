@@ -15,6 +15,9 @@ interface HorarioDao {
     @Delete
     fun eliminarHorario(horario: Horario)
 
-    @Query(value = "SELECT * FROM horario")
-    fun obtenerHorario(): List<Horario>
+    /*@Query(value = "SELECT * FROM horario")
+    fun obtenerHorario(): List<Horario>*/
+
+    @Query(value = "SELECT * FROM horario where id=1")
+    fun obtenerHorario(): Horario
 }

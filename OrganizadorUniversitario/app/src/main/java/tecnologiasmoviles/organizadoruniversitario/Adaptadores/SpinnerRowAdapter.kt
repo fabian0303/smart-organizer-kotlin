@@ -1,6 +1,7 @@
 package tecnologiasmoviles.organizadoruniversitario.Adaptadores
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +27,8 @@ class SpinnerRowAdapter(private val mContext: FragmentActivity, private val list
     fun createView(position: Int, convertView: View?, parent: ViewGroup): View {
         val layout = convertView ?:LayoutInflater.from(mContext).inflate(R.layout.item_spinner_row,parent,false)
         layout.curso_row.text = listacursos[position].nombre
-        layout.color_button.setBackgroundColor(listacursos[position].color)
+        layout.color_button.backgroundTintList = ColorStateList.valueOf(listacursos[position].color)
+        layout.color_button.isEnabled = false
         //layout.curso.colorCursoBtn?.setText(curso.color)
 
         return layout

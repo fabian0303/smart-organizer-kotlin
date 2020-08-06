@@ -1,8 +1,10 @@
 package tecnologiasmoviles.organizadoruniversitario.Vistas
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_agregar_curso_activity.*
 import petrov.kristiyan.colorpicker.ColorPicker
 import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
@@ -66,9 +68,11 @@ class agregarCursoActivity : AppCompatActivity() {
                 cursoDao.agregarCurso(curso)
 
                 onBackPressed()
+                Toast.makeText(this, "Curso creado exitosamente", Toast.LENGTH_SHORT).show()
 
             }
             else{
+                Toast.makeText(this, "Por favor ingresa los datos solicitados", Toast.LENGTH_SHORT).show()
                 //colorCursoBtn.setText("No registrado")
             }
 
@@ -80,7 +84,18 @@ class agregarCursoActivity : AppCompatActivity() {
      */
     private fun cancelarInsertCurso(){
         cencelarRegistro.setOnClickListener {
-            onBackPressed()
+            val confirmacion = android.app.AlertDialog.Builder(this).create()
+            confirmacion.setTitle("¿Cancelar operación?")
+            confirmacion.setButton(android.app.AlertDialog.BUTTON_POSITIVE, "Si")
+            {dialog, wich ->
+                dialog.dismiss()
+                onBackPressed()
+            }
+            confirmacion.setButton(android.app.AlertDialog.BUTTON_NEGATIVE,"No")
+            {dialog, wich -> dialog.dismiss()}
+            confirmacion.show()
+            confirmacion.getButton(android.app.AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1D7A9F"))
+            confirmacion.getButton(android.app.AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1D7A9F"))
         }
     }
 }

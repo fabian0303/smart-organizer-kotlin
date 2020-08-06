@@ -13,10 +13,9 @@ import tecnologiasmoviles.organizadoruniversitario.Adaptadores.CursoAdapter
 import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
 import tecnologiasmoviles.organizadoruniversitario.Data.AppDatabase
 import tecnologiasmoviles.organizadoruniversitario.Data.CursoDao
+import tecnologiasmoviles.organizadoruniversitario.Vistas.NavegacionCurso.Home_CursoActivity
 import tecnologiasmoviles.organizadoruniversitario.Vistas.agregarCursoActivity
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 lateinit var cursoDao: CursoDao
@@ -29,20 +28,20 @@ class FragmentCurso : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-         view1 = inflater.inflate(R.layout.fragment_curso, container, false)
-        val curso1 = Curso( "Robotic",0 )
-
-
-
+        view1 = inflater.inflate(R.layout.fragment_curso, container, false)
+        val curso1 = Curso( "Tecnologías Móviles", Color.parseColor("#a6140a"))
+        val curso2 = Curso( "Ingeniería Económica", Color.parseColor("#099c3d"))
 
         cursoDao = AppDatabase.getInstance(activity!!).cursoDao()
 
         cursoDao.agregarCurso(curso1)
+        cursoDao.agregarCurso(curso2)
 
 
 
-
-
+        val lista_cursos = cursoDao.obtenerCurso()
+        val lista = view1.findViewById(R.id.lista_cursos) as ListView
+        val adapter = CursoAdapter( activity!!, lista_cursos)
         val agregarCurso = view1.findViewById(R.id.agregarCursoBtn) as com.google.android.material.floatingactionbutton.FloatingActionButton
         agregarCurso.setColorFilter(Color.WHITE)
         agregarCurso.setOnClickListener {
@@ -51,21 +50,35 @@ class FragmentCurso : Fragment() {
 
         }
 
+        lista.adapter = adapter
+
+
 
         return view1
     }
 
     override fun onStart() {
         super.onStart()
-        val lista_cursos = ArrayList<Curso>(cursoDao.obtenerCurso())
+        irAcurso()
 
-        val lista = view1.findViewById(R.id.lista_cursos) as ListView
 
-        val adapter = CursoAdapter( activity!!, lista_cursos )
-
-        lista.adapter = adapter
 
     }
 
-
+    private fun irAcurso(){
+        val lista_cursos = cursoDao.obtenerCurso()
+        val lista = view1.findViewById(R.id.lista_cursos) as ListView
+        val adapter =
+            CursoAdapter(
+                activity!!,
+                lista_cursos
+            )
+        lista.adapter = adapter
+        lista.setOnItemClickListener { parent, view, position, id ->
+            val intent = Intent(activity!!, Home_CursoActivity::class.java )
+            intent.putExtra("Curso", lista_cursos[position])
+            //Toast.makeText(activity!!, lista_cursos[position].nombre,Toast.LENGTH_LONG).show()
+            startActivity(intent)
+        }
+    }
 }
