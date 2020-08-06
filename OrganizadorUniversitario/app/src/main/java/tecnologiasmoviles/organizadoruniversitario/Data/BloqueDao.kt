@@ -17,4 +17,7 @@ interface BloqueDao {
 
     @Query(value = "SELECT * FROM bloque")
     fun obtenerBloque(): List<Bloque>
+
+    @Query("DELETE FROM bloque")
+    fun limpiar()
 }

@@ -17,12 +17,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            android:layout_marginBottom="40dp">
+            android:layout_marginBottom="40dp"
+            android:orientation="vertical">
 
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Agregar nota"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="150dp"
                 android:layout_weight="1"
                 android:contentDescription="TODO"
@@ -109,8 +120,9 @@
                 <Spinner
                     android:id="@+id/aprobativo_spinner"
                     android:layout_width="320dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/spinner_border" />
             </LinearLayout>
 
             <LinearLayout

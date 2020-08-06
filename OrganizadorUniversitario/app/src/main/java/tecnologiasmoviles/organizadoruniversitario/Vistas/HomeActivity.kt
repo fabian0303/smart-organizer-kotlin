@@ -2,13 +2,20 @@ package tecnologiasmoviles.organizadoruniversitario.Vistas
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
 import tecnologiasmoviles.organizadoruniversitario.Adaptadores.MyPageAdapter
+import tecnologiasmoviles.organizadoruniversitario.Data.AppDatabase
+import tecnologiasmoviles.organizadoruniversitario.Data.BloqueDao
 import tecnologiasmoviles.organizadoruniversitario.R
 
 
@@ -45,7 +52,7 @@ class HomeActivity : AppCompatActivity() {
                 supportFragmentManager
             )
         viewPager.adapter = fragmentAdapter
-        tabLayout.setupWithViewPager(viewPager)
+        tabLayoutHome.setupWithViewPager(viewPager)
 
     }
 
@@ -57,13 +64,53 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id= item.itemId;
         if(id == R.id.cerrarSesion){
-            title = "Inicio"
-            val prefs = getSharedPreferences(getString(R.string.prefs_file),Context.MODE_PRIVATE).edit()
-            prefs.clear()
-            prefs.apply()
-            FirebaseAuth.getInstance().signOut()
-            onBackPressed()
+            val salirDialog = AlertDialog.Builder(this).create() //se crea un dialog para confirmar el cierre de sesión
+            salirDialog.setTitle("¿Desea cerrar sesión?")
+            salirDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Si"
+            ) { dialog, which ->
+                title = "Inicio"
+                val prefs = getSharedPreferences(getString(R.string.prefs_file),Context.MODE_PRIVATE).edit()
+                prefs.clear()
+                prefs.apply()
+                FirebaseAuth.getInstance().signOut()
+                val intent = Intent(this, AuthActivity::class.java)
+                this.finish() //se finaliza la activity actual para llamar a la activity de autenticacinon
+                startActivity(intent)
+                Toast.makeText(this, "Cerraste sesión", Toast.LENGTH_LONG).show()
+            }
+            salirDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO"
+            ) { dialog, which -> dialog.dismiss()}
+            salirDialog.show()
+            salirDialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1D7A9F"))
+            salirDialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1D7A9F"))
+            //onBackPressed()
 
+        }
+        else if(id == R.id.limpiar_horario){
+            val confirmar = AlertDialog.Builder(this).create() //se crea un dialog para confirmar el cierre de sesión
+            confirmar.setTitle("¿Desea limpiar el horario?")
+            confirmar.setMessage("Esta acción elimina todos los cursos asignados en el horario")
+            confirmar.setButton(AlertDialog.BUTTON_POSITIVE, "Confirmar"
+            ) { dialog, which ->
+                var bloqueDao: BloqueDao = AppDatabase.getInstance(this).bloqueDao()
+                bloqueDao.limpiar()
+                dialog.dismiss()
+                finish()
+                startActivity(intent)
+                Toast.makeText(this, "Se limpió el horario", Toast.LENGTH_SHORT).show()
+            }
+            confirmar.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancelar"
+            ) { dialog, which -> dialog.dismiss()}
+            confirmar.show()
+            confirmar.getButton(android.app.AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1D7A9F"))
+            confirmar.getButton(android.app.AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1D7A9F"))
+            val tabLayout = findViewById<View>(R.id.tabLayoutHome) as TabLayout
+            val tab = tabLayout.getTabAt(1)
+            tab!!.select()
+        }
+        else if(id == R.id.configuracion_horario){
+            val intent = Intent(this, configurarHorarioActivity::class.java)
+            startActivity(intent)
         }
         return super.onOptionsItemSelected(item)
     }
@@ -77,5 +124,7 @@ class HomeActivity : AppCompatActivity() {
         salirDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO"
         ) { dialog, which -> dialog.dismiss()}
         salirDialog.show()
+        salirDialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1D7A9F"))
+        salirDialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1D7A9F"))
     }
 }

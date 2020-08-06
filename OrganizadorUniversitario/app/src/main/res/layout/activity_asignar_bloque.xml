@@ -14,13 +14,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:layout_marginBottom="40dp">
+        android:layout_marginBottom="40dp"
+        android:orientation="vertical">
 
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Asignar curso"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="0dp"
+            android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_gravity="clip_horizontal|center_horizontal"
             android:layout_weight="1"
             android:contentDescription="TODO"
             app:srcCompat="@drawable/libro2" />
@@ -121,6 +133,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/boton_redondeado_color_primario_dark"
+                    android:textColor="#FFFFFF"
                     tools:text="Ninguno" />
 
             </LinearLayout>
