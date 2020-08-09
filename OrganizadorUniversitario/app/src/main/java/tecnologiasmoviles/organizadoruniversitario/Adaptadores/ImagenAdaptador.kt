@@ -1,17 +1,18 @@
 package tecnologiasmoviles.organizadoruniversitario.Adaptadores
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.fragment.app.FragmentActivity
-import kotlinx.android.synthetic.main.item_curso.view.*
-import tecnologiasmoviles.organizadoruniversitario.Clases.Archivo
-import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
+import kotlinx.android.synthetic.main.item_imagen.view.*
+import tecnologiasmoviles.organizadoruniversitario.Clases.Imagen
 import tecnologiasmoviles.organizadoruniversitario.R
 
-class ImagenAdaptador(private val mContext: FragmentActivity, private val listaImagenes: List<Archivo>):
-    ArrayAdapter<Archivo>(mContext,0,listaImagenes) {
+class ImagenAdaptador(private val mContext: Context, private val listaImagenes: List<Imagen>):
+    ArrayAdapter<Imagen>(mContext,0,listaImagenes) {
 
     //@SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -19,10 +20,16 @@ class ImagenAdaptador(private val mContext: FragmentActivity, private val listaI
 
         val imagen = listaImagenes[position]
 
-        //layout.curso.text = imagen.nombre
+        layout.descripcionTxt.text = imagen.refCurso
+        val bitmap:Bitmap = convertByteTOImage(imagen.imagen)
+        layout.image_view.setImageBitmap(bitmap)
         //layout.curso.colorCursoBtn?.setBackgroundColor(curso.color)
         //layout.curso.colorCursoBtn?.setText(curso.color)
 
         return layout
+    }
+
+    private fun convertByteTOImage(lista:ByteArray): Bitmap {
+        return BitmapFactory.decodeByteArray(lista,0,lista.size)
     }
 }
