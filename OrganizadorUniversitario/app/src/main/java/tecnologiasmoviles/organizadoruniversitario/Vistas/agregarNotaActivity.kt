@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_agregar_nota2.*
 import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
 import tecnologiasmoviles.organizadoruniversitario.Clases.Nota
 import tecnologiasmoviles.organizadoruniversitario.Data.AppDatabase
+import tecnologiasmoviles.organizadoruniversitario.Data.CursoDao
 import tecnologiasmoviles.organizadoruniversitario.Data.NotaDao
 import tecnologiasmoviles.organizadoruniversitario.R
 
@@ -18,6 +19,8 @@ class agregarNotaActivity : AppCompatActivity() {
     lateinit var registrarNota :Button
     lateinit var cancelarRegistro :Button
     lateinit var notaDao: NotaDao
+    lateinit var cursoDao: CursoDao
+    lateinit var notas: List<Nota>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +52,7 @@ class agregarNotaActivity : AppCompatActivity() {
     private fun insertarNota(curso:Curso){
         registrarNota.setOnClickListener {
             if(notaingresada.text.isNotEmpty() && porcentajeingresado.text.isNotEmpty()){
+                cursoDao = AppDatabase.getInstance(this).cursoDao()
                 val aprobaSeleccionado = aprobativo_spinner.selectedItem.toString()
                 val nota1 = notaingresada.text.toString()
                 val porcentaje = porcentajeingresado.text.toString()
@@ -56,10 +60,21 @@ class agregarNotaActivity : AppCompatActivity() {
                 if(aprobaSeleccionado=="No"){
                     aproba=false
                 }
-                val nota = Nota(0,curso.nombre,nota1.toFloat(),porcentaje.toFloat(),aproba)
-                notaDao.agregarNota(nota)
-                onBackPressed()
-                Toast.makeText(this, "Nota creada exitosamente", Toast.LENGTH_SHORT).show()
+                notas = cursoDao.obtenerNotasDeUnCurso(curso.nombre)
+                var suma = 0.0
+                for (nota in notas){
+                    suma+= nota.porcentaje
+                }
+                if((suma+porcentaje.toFloat())>100.0){
+                    onBackPressed()
+                    Toast.makeText(this, "Error: Sobrepasa el 100%", Toast.LENGTH_LONG).show()
+                }else{
+                    val nota = Nota(0,curso.nombre,nota1.toFloat(),porcentaje.toFloat(),aproba)
+                    notaDao.agregarNota(nota)
+                    onBackPressed()
+                    Toast.makeText(this, "Nota creada exitosamente", Toast.LENGTH_SHORT).show()
+                }
+
             }
             else{
                 Toast.makeText(this, "Por favor ingresa los datos solicitados", Toast.LENGTH_SHORT).show()
