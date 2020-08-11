@@ -29,13 +29,13 @@ class FragmentCurso : Fragment() {
     ): View? {
 
         view1 = inflater.inflate(R.layout.fragment_curso, container, false)
-        val curso1 = Curso( "Tecnologías Móviles", Color.parseColor("#a6140a"))
-        val curso2 = Curso( "Ingeniería Económica", Color.parseColor("#099c3d"))
+        //val curso1 = Curso( 0,"Tecnologías Móviles", Color.parseColor("#a6140a"))
+        //val curso2 = Curso( 0,"Ingeniería Económica", Color.parseColor("#099c3d"))
 
         cursoDao = AppDatabase.getInstance(activity!!).cursoDao()
 
-        cursoDao.agregarCurso(curso1)
-        cursoDao.agregarCurso(curso2)
+        //cursoDao.agregarCurso(curso1)
+        //cursoDao.agregarCurso(curso2)
 
 
 

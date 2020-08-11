@@ -4,16 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ListView
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_galeria_imagenes.*
-import tecnologiasmoviles.organizadoruniversitario.Adaptadores.CursoAdapter
 import tecnologiasmoviles.organizadoruniversitario.Adaptadores.ImagenAdaptador
 import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
 import tecnologiasmoviles.organizadoruniversitario.Data.AppDatabase
 import tecnologiasmoviles.organizadoruniversitario.Data.ImagenDao
 import tecnologiasmoviles.organizadoruniversitario.R
-import tecnologiasmoviles.organizadoruniversitario.my_fragment.cursoDao
-import tecnologiasmoviles.organizadoruniversitario.my_fragment.view1
 
 class GaleriaImagenesActivity : AppCompatActivity() {
     lateinit var curso_actual: Curso
@@ -33,9 +29,9 @@ class GaleriaImagenesActivity : AppCompatActivity() {
             )
         lista.adapter = adapter
 
-        opcionesParaañadirImagenes()
+        OpcionesImagenes()
     }
-    private fun opcionesParaañadirImagenes(){
+    private fun OpcionesImagenes(){
         agregarImagenBtn.setOnClickListener {
             val intent = Intent(this, OpcionesImagenActivity::class.java )
             intent.putExtra("Curso ", curso_actual)
