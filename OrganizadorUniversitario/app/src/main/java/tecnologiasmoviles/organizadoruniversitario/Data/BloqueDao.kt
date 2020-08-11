@@ -20,4 +20,8 @@ interface BloqueDao {
 
     @Query("DELETE FROM bloque")
     fun limpiar()
+
+    @Query("DELETE FROM bloque WHERE nombreCurso = :curso")
+    fun eliminarByNombreCurso(curso: String)
+
 }
