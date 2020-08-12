@@ -8,6 +8,6 @@ import androidx.room.PrimaryKey
 class Imagen (
     @PrimaryKey(autoGenerate = true)
     val id:Int,
-    @ColumnInfo val refCurso: String,
+    @ColumnInfo val refCurso: Int,
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB) val imagen: ByteArray
 )

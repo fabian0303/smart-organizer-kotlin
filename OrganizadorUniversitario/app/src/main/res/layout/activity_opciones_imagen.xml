@@ -8,18 +8,18 @@
 
     <ImageView
         android:id="@+id/viewImagen"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="321dp"
+        android:layout_height="309dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.451"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/exam" />
+        app:srcCompat="@drawable/galeria" />
 
     <Button
         android:id="@+id/agregarDesdeGaleria"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
@@ -30,31 +30,45 @@
         app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viewImagen"
-        app:layout_constraintVertical_bias="0.722" />
+        app:layout_constraintVertical_bias="0.608" />
 
     <Button
         android:id="@+id/tomarFoto"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="124dp"
         android:text="Tomar fotografia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toEndOf="@+id/agregarDesdeGaleria"
         app:layout_constraintTop_toBottomOf="@+id/viewImagen"
-        app:layout_constraintVertical_bias="0.715" />
+        app:layout_constraintVertical_bias="0.601" />
 
     <Button
         android:id="@+id/guardarImg"
-        android:layout_width="0dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        style="@style/ButtonAceptar"
         android:text="Guardar imagen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewImagen"
-        app:layout_constraintVertical_bias="0.739" />
+        app:layout_constraintTop_toBottomOf="@+id/tomarFoto"
+        app:layout_constraintVertical_bias="0.713" />
+
+    <Button
+        android:id="@+id/cancelar"
+        style="@style/ButtonCancelar"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guardarImg"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/agregarDesdeGaleria"
+        app:layout_constraintVertical_bias="0.713" />
 </androidx.constraintlayout.widget.ConstraintLayout>

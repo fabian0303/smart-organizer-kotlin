@@ -89,7 +89,7 @@
             app:srcCompat="@drawable/notas" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/opciones"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Opciones"

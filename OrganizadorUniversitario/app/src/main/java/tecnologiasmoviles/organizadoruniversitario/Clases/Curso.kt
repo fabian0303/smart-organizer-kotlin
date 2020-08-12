@@ -8,8 +8,7 @@ import java.io.Serializable
 
 @Entity(tableName = "curso")
 class Curso(
-     @PrimaryKey(autoGenerate = false)
-     var nombre:String,
-     @NotNull
-     var color: Int = 0
+     @PrimaryKey(autoGenerate = true)  val id:Int,
+     @ColumnInfo var nombre:String,
+     @ColumnInfo var color: Int = 0
 ):Serializable
