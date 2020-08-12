@@ -35,11 +35,12 @@
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:hint="Correo Electronico"
             android:inputType="textEmailAddress"
             android:singleLine="false"
-            android:backgroundTint="@color/color_letras2"
-            android:textColorHint="@color/color_letras2"/>
+            android:textColor="@color/color_letras2"
+            android:textColorHint="@color/color_letras2" />
 
         <Space
             android:layout_width="match_parent"
@@ -49,10 +50,11 @@
             android:id="@+id/passwordEditText2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/color_letras2"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:ems="10"
             android:hint="Contraseña"
             android:inputType="textPassword"
+            android:textColor="@color/color_letras2"
             android:textColorHint="@color/color_letras2" />
 
 
