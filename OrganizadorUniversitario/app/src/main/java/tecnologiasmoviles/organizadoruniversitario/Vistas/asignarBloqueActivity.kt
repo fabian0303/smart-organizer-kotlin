@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_asignar_bloque.*
+import kotlinx.android.synthetic.main.item_curso.*
 import kotlinx.android.synthetic.main.item_spinner_row.view.*
 import tecnologiasmoviles.organizadoruniversitario.Adaptadores.SpinnerRowAdapter
 import tecnologiasmoviles.organizadoruniversitario.Clases.Bloque
@@ -28,7 +29,6 @@ class asignarBloqueActivity() : AppCompatActivity() {
     lateinit var asignarCursoBtn: Button
     lateinit var cencelarRegistro: Button
     val lista_bloques_seleccionados = mutableListOf<String>()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -125,7 +125,7 @@ class asignarBloqueActivity() : AppCompatActivity() {
     }
 
     /**
-     * Registra un curso en la base de datos
+     * Asignar curso
      */
     private fun insertarBloque() {
         asignarCursoBtn.setOnClickListener {
@@ -142,7 +142,8 @@ class asignarBloqueActivity() : AppCompatActivity() {
                             lista_bloques_seleccionados[i],
                             it1,
                             getHoraInicio(lista_bloques_seleccionados[i].toInt()),
-                            getHoraFin(lista_bloques_seleccionados[i].toInt())
+                            getHoraFin(lista_bloques_seleccionados[i].toInt()),
+                            cursoDao.obtenerIDCurso(cursoSeleccionado)
                         )
                     }
                     if (bloque != null) {

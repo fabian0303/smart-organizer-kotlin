@@ -24,4 +24,7 @@ interface CursoDao {
 
     @Query(value = "SELECT * FROM curso WHERE id = :id_curso")
     fun obtenerCursoEspecifico(id_curso: Int):Curso
+
+    @Query(value = "SELECT id FROM curso WHERE nombre = :nombre")
+    fun obtenerIDCurso(nombre: String): Int
 }
