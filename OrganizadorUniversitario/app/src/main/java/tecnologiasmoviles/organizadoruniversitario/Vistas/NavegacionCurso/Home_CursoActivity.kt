@@ -11,7 +11,9 @@ import kotlinx.android.synthetic.main.activity_home.toolBar
 import kotlinx.android.synthetic.main.activity_home__curso.*
 import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
 import tecnologiasmoviles.organizadoruniversitario.Data.AppDatabase
+import tecnologiasmoviles.organizadoruniversitario.Data.BloqueDao
 import tecnologiasmoviles.organizadoruniversitario.Data.CursoDao
+import tecnologiasmoviles.organizadoruniversitario.Data.HorarioDao
 import tecnologiasmoviles.organizadoruniversitario.R
 
 class Home_CursoActivity : AppCompatActivity() {
@@ -24,6 +26,7 @@ class Home_CursoActivity : AppCompatActivity() {
     lateinit var video : ImageButton
     lateinit var notas : ImageButton
     lateinit var cursoDao: CursoDao
+    lateinit var horarioDao: BloqueDao
 
 
 
@@ -31,6 +34,7 @@ class Home_CursoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home__curso)
         cursoDao = AppDatabase.getInstance(this).cursoDao()
+        horarioDao =AppDatabase.getInstance(this).bloqueDao()
         curso_base = intent.getSerializableExtra("Curso") as Curso
 
 
@@ -68,6 +72,7 @@ class Home_CursoActivity : AppCompatActivity() {
         if(id == R.id.eliminar_Curso){
             Toast.makeText(this,"Eliminar "+ curso_base.nombre, Toast.LENGTH_LONG).show()
             cursoDao.eliminarCurso(curso_base)
+            ///horarioDao.eliminarByNombreCurso(curso_base.nombre)
             onBackPressed()
         }
 

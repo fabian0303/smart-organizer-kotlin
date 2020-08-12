@@ -35,7 +35,7 @@ class OpcionesImagenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_opciones_imagen)
-        //curso_actual = intent.getSerializableExtra("Curso") as Curso
+        curso_actual = intent.getSerializableExtra("Curso") as Curso
         IMG_Dao = AppDatabase.getInstance(this).imagenDao()
         myImagen = findViewById(R.id.viewImagen)
 
@@ -45,7 +45,6 @@ class OpcionesImagenActivity : AppCompatActivity() {
     }
     //Añadimos la imagen desde la galeria.
     private fun mostrarGaleria(){
-        //Toast.makeText(applicationContext,"Galeria de imagenes", Toast.LENGTH_LONG).show()
         val intentGaleria = Intent(Intent.ACTION_PICK)
         intentGaleria.type ="image/*"
         startActivityForResult(intentGaleria,REQUEST_GALERIA)
@@ -140,17 +139,17 @@ class OpcionesImagenActivity : AppCompatActivity() {
     private fun guardarImagen(){
         guardarImg.setOnClickListener {
             if(bitmap != null){
-                val nombre:String = "Test"
+
                 val imagen:ByteArray=convertirImagenTOByArray(bitmap!!)
-                val Imagen_1 =Imagen(0,nombre,imagen)
+                val Imagen_1 =Imagen(0,curso_actual.id,imagen)
                 IMG_Dao.inserImagen(Imagen_1)
-                Toast.makeText(applicationContext,nombre + IMG_Dao.gelAllImg().size, Toast.LENGTH_LONG).show()
+                onBackPressed()
             }
 
 
         }
     }
-    public fun convertirImagenTOByArray(bitmap: Bitmap):ByteArray{
+    private fun convertirImagenTOByArray(bitmap: Bitmap):ByteArray{
         val stream= ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG,0, stream)
         return stream.toByteArray()

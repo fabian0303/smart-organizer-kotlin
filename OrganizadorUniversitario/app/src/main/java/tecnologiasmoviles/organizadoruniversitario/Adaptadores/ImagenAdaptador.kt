@@ -16,11 +16,11 @@ class ImagenAdaptador(private val mContext: Context, private val listaImagenes: 
 
     //@SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val layout = LayoutInflater.from(mContext).inflate(R.layout.item_imagen,parent,false)
+        val layout = LayoutInflater.from(mContext).inflate(R.layout.item_imagen_miniatura,parent,false)
 
         val imagen = listaImagenes[position]
 
-        layout.descripcionTxt.text = imagen.refCurso
+        //layout.descripcionTxt.text = imagen.refCurso.toString()
         val bitmap:Bitmap = convertByteTOImage(imagen.imagen)
         layout.image_view.setImageBitmap(bitmap)
         //layout.curso.colorCursoBtn?.setBackgroundColor(curso.color)
