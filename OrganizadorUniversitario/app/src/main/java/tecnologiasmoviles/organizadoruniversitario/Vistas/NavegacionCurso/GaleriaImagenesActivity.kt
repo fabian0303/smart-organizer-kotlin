@@ -32,13 +32,10 @@ class GaleriaImagenesActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
-        val lista_imagenes = IMG_Dao.gelAllImg()
+        //Obtenemos las imagenes del curso
+        val lista_imagenes = IMG_Dao.gelAllImgOfCurso(curso_actual.id)
         val lista =findViewById(R.id.lista_Imagenes) as GridView
-        val adapter =
-            ImagenAdaptador(
-                this,
-                lista_imagenes
-            )
+        val adapter = ImagenAdaptador( this, lista_imagenes )
         lista.adapter = adapter
         super.onStart()
     }

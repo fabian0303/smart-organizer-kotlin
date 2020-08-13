@@ -42,6 +42,7 @@ class OpcionesImagenActivity : AppCompatActivity() {
         agregarFotoDesdeGaleria()
         tomarFotografia()
         guardarImagen()
+        cancelar()
     }
     //Añadimos la imagen desde la galeria.
     private fun mostrarGaleria(){
@@ -153,5 +154,11 @@ class OpcionesImagenActivity : AppCompatActivity() {
         val stream= ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG,0, stream)
         return stream.toByteArray()
+    }
+
+    private fun cancelar(){
+        cancelar.setOnClickListener {
+            onBackPressed()
+        }
     }
 }

@@ -17,7 +17,8 @@ interface ImagenDao {
     @Query(value = "SELECT * FROM imagen")
     fun gelAllImg(): List<Imagen>
 
-
+    @Query(value = "SELECT * FROM imagen WHERE imagen.refCurso =:id_curso")
+    fun gelAllImgOfCurso(id_curso:Int): List<Imagen>
 
 
 }
