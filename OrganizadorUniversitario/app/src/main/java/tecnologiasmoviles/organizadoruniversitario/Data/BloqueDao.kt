@@ -2,6 +2,8 @@ package tecnologiasmoviles.organizadoruniversitario.Data
 
 import androidx.room.*
 import tecnologiasmoviles.organizadoruniversitario.Clases.Bloque
+import tecnologiasmoviles.organizadoruniversitario.Clases.Curso
+
 
 @Dao
 interface BloqueDao {

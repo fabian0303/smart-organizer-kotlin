@@ -1,20 +1,19 @@
 package tecnologiasmoviles.organizadoruniversitario.Clases
 
 import android.graphics.drawable.Drawable
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
+import androidx.room.*
+import androidx.room.ForeignKey.CASCADE
 
 @Entity(tableName = "bloque")
 class Bloque(
 
-    @ColumnInfo val nombreCurso: String,
+    @ColumnInfo var nombreCurso: String,
     @ColumnInfo val dia: String,
     @ColumnInfo val bloque: String,
-    @ColumnInfo val color: Int,
+    @ColumnInfo var color: Int,
     @ColumnInfo val horaInicio: String,
     @ColumnInfo val horaFin: String,
+    @ColumnInfo val idCurso: Int,
 
     @PrimaryKey(autoGenerate = false)
     val id:String = dia+bloque

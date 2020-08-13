@@ -133,17 +133,27 @@ class FragmentHorario : Fragment() {
                 bloqueText.width = anchoDias
                 bloqueText.setTextColor(Color.WHITE)
                 bloqueText.setOnLongClickListener{
+                    if(cursoDao.obtenerCurso().isEmpty()){
+                        Toast.makeText(activity!!, "No existen cursos creados para asignar", Toast.LENGTH_SHORT).show()
+                    }
+                    else {
+                        val bloque = getBloque(bloqueText.id)
+                        val dia = getDia(bloqueText.id)
+                        //Toast.makeText(activity, "$dia | Bloque $bloque", Toast.LENGTH_SHORT).show()
 
-                    val bloque = getBloque(bloqueText.id)
-                    val dia = getDia(bloqueText.id)
-                    //Toast.makeText(activity, "$dia | Bloque $bloque", Toast.LENGTH_SHORT).show()
-
-                    val intent = Intent(context, asignarBloqueActivity::class.java) //Se llama a la activity para asignar bloque
-                    intent.putExtra("inicio", horarioInicioBloques) //Se le pasan los arreglos a la activity
-                    intent.putExtra("fin", horarioFinBloques)
-                    intent.putExtra("bloque", bloque)
-                    intent.putExtra("dia", dia)
-                    startActivity(intent)
+                        val intent = Intent(
+                            context,
+                            asignarBloqueActivity::class.java
+                        ) //Se llama a la activity para asignar bloque
+                        intent.putExtra(
+                            "inicio",
+                            horarioInicioBloques
+                        ) //Se le pasan los arreglos a la activity
+                        intent.putExtra("fin", horarioFinBloques)
+                        intent.putExtra("bloque", bloque)
+                        intent.putExtra("dia", dia)
+                        startActivity(intent)
+                    }
                     true
                 }
                 /*
@@ -170,10 +180,15 @@ class FragmentHorario : Fragment() {
         val botonFlotante = view.findViewById(R.id.añadirAsignatura_btn) as com.google.android.material.floatingactionbutton.FloatingActionButton
         botonFlotante.setColorFilter(Color.WHITE)
         botonFlotante.setOnClickListener {
-            val intent = Intent(context, asignarBloqueActivity::class.java) //Se llama a la activity para asignar bloque
-            intent.putExtra("inicio", horarioInicioBloques) //Se le pasan los arreglos a la activity
-            intent.putExtra("fin", horarioFinBloques)
-            startActivity(intent)
+            if(cursoDao.obtenerCurso().isEmpty()){
+                Toast.makeText(activity!!, "No existen cursos creados para asignar", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                val intent = Intent(context, asignarBloqueActivity::class.java) //Se llama a la activity para asignar bloque
+                intent.putExtra("inicio", horarioInicioBloques) //Se le pasan los arreglos a la activity
+                intent.putExtra("fin", horarioFinBloques)
+                startActivity(intent)
+            }
         }
 
         //Funcion recursiva para mostrar/ocultar el botón flotante
@@ -207,6 +222,7 @@ class FragmentHorario : Fragment() {
             }
         })
         showHideBotonFlotante()
+        getSetBloques()
         return view
     }
 
@@ -361,9 +377,10 @@ class FragmentHorario : Fragment() {
 
 
     override fun onStart() {
-        super.onStart()
         generarHorario()
+        cleanHorario()
         getSetBloques()
+        super.onStart()
     }
 
     fun generarHorario(){
@@ -384,12 +401,31 @@ class FragmentHorario : Fragment() {
     }
 
     fun getSetBloques(){
-        val lista_bloques = ArrayList<Bloque>(bloqueDao.obtenerBloque())
+        val lista_bloques = checkValues(bloqueDao.obtenerBloque() as ArrayList<Bloque>) //Checkeo valores de los bloques
         var contador = 0
         while(contador < lista_bloques.size){
             setBloque(lista_bloques[contador])
             contador++
         }
+    }
+
+    //Se checkean los cambios en los bloques según la configuración del curso
+    fun checkValues(lista_bloques: ArrayList<Bloque>): ArrayList<Bloque> {
+        var aux = ArrayList<Bloque>()
+        var contador = 0
+        while(contador < lista_bloques.size){
+            if(cursoDao.obtenerCursoEspecifico(lista_bloques[contador].idCurso)!=null){
+                lista_bloques[contador].color = cursoDao.obtenerCursoEspecifico(lista_bloques[contador].idCurso).color
+                lista_bloques[contador].nombreCurso = cursoDao.obtenerCursoEspecifico(lista_bloques[contador].idCurso).nombre
+                bloqueDao.agregarBloque(lista_bloques[contador])
+                aux.add(lista_bloques[contador])
+            }
+            else{
+                bloqueDao.eliminarBloque(lista_bloques[contador])
+            }
+            contador++
+        }
+        return aux
     }
 
     @SuppressLint("ResourceAsColor")
