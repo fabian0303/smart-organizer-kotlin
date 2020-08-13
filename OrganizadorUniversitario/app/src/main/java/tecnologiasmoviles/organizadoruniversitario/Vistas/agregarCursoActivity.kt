@@ -63,14 +63,14 @@ class agregarCursoActivity : AppCompatActivity() {
     private fun insertCurso(){
         registrarCurso.setOnClickListener {
             if(colorCuro !=0 && nombreCurso.text.toString().isNotEmpty()){
-                var nombre=nombreCurso.text.toString()
-                val curso= Curso(nombre,colorCuro)
-                cursoDao.agregarCurso(curso)
+            var nombre=nombreCurso.text.toString()
+            val curso= Curso(0,nombre,colorCuro)
+            cursoDao.agregarCurso(curso)
 
-                onBackPressed()
-                Toast.makeText(this, "Curso creado exitosamente", Toast.LENGTH_SHORT).show()
+            onBackPressed()
+            Toast.makeText(this, "Curso creado exitosamente", Toast.LENGTH_SHORT).show()
 
-            }
+        }
             else{
                 Toast.makeText(this, "Por favor ingresa los datos solicitados", Toast.LENGTH_SHORT).show()
                 //colorCursoBtn.setText("No registrado")

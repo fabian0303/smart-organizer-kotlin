@@ -8,9 +8,9 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -20,13 +20,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Vistas.NavegacionCurso.OpcionesImagenActivity"></activity>
+        <activity android:name=".Vistas.NavegacionCurso.modificarCursoActivity"></activity>
+        <activity android:name=".Vistas.NavegacionCurso.GaleriaImagenesActivity" />
+        <activity android:name=".Vistas.NavegacionCurso.OpcionesImagenActivity" />
         <activity android:name=".Vistas.NavegacionCurso.Home_CursoActivity" />
         <activity android:name=".Vistas.agregarNotaActivity" />
         <activity android:name=".Vistas.agregarCursoActivity" />
         <activity android:name=".Vistas.asignarBloqueActivity" />
         <activity android:name=".Vistas.configurarHorarioActivity" />
-        <activity android:name=".Adaptadores.CursoAdapter" tools:ignore="Instantiatable" />
+        <activity
+            android:name=".Adaptadores.CursoAdapter"
+            tools:ignore="Instantiatable" />
         <activity android:name=".Vistas.NotaDetalle" />
         <activity android:name=".GradeActivity" />
         <activity android:name=".ScheduleActivity" />
